@@ -53,6 +53,12 @@ header h2 {
     margin: 20px 0;
 }
 
+.typing-text {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
 header p {
     font-size: 14px;
     margin: 20px 0;
