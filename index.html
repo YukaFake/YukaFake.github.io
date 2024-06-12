@@ -9,7 +9,10 @@
 </head>
 <body>
     <nav>
-        <ul>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul id="nav-links">
             <li><a href="index.html">_hello</a></li>
             <li><a href="#writeups">_writeups</a></li>
             <li><a href="#blog">_blog</a></li>
@@ -32,5 +35,11 @@
             <a target="_blank" href="mailto:joshuaavi@proton.me"><i class="fas fa-envelope"></i></a>
         </div>
     </footer>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
