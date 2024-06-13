@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YukaFake Blog</title>
+    <link rel="stylesheet" href="../css/blog-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul id="nav-links">
+            <li><a href="#" onclick="loadPage(event, '../index.html')">_hello</a></li>
+            <li><a href="#" onclick="loadPage(event, 'writeups.html')">_writeups</a></li>
+            <li><a href="#" onclick="loadPage(event, 'blog.html')">_blog</a></li>
+        </ul>
+    </nav>
+    <header>
+        <div class="content">
+            <h1>mY Blog</h1>
+            <p>Welcome to my blog! Here you will find posts about cybersecurity, technology, programming, and more.
+                Enjoy reading!</p>
+        </div>
+    </header>
+    <main id="blog-main">
+        <div class="blog-posts">
+            <div class="post" data-id="1">
+                <h2>CVE-2024-32002</h2>
+                <p class="date">June 12, 2024</p>
+                <p class="excerpt">Este script demuestra cómo explotar la vulnerabilidad CVE-2024-32002 para obtener una
+                    reverse shell, proporcionando acceso remoto al sistema afectado. Úselo con precaución en entornos
+                    controlados y solo con fines educativos o de pruebas de seguridad.
+                </p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+            <!-- More blog posts can be added here -->
+        </div>
+        <div id="full-post" style="display: none;">
+            <a href="#" id="back-to-blog">Back to Blog</a>
+            <div id="post-content"></div>
+        </div>
+    </main>
+    <div id="loading" style="display: none;">
+        <div class="loader"></div>
+    </div>
+    <footer>
+        <div class="social-links">
+            <a target="_blank" href="https://github.com/JJoosh"><i class="fab fa-github"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/joshaviles"><i class="fab fa-linkedin"></i></a>
+            <a target="_blank" href="mailto:joshuaavi@proton.me"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+    <script src="../js/script.js"></script>
+    <script src="../js/blog.js"></script>
+</body>
+
+</html>

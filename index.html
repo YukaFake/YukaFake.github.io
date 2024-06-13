@@ -13,9 +13,9 @@
             <i class="fas fa-bars"></i>
         </div>
         <ul id="nav-links">
-            <li><a href="index.html">_hello</a></li>
-            <li><a href="#writeups">_writeups</a></li>
-            <li><a href="#blog">_blog</a></li>
+            <li><a href="#" onclick="loadPage(event, 'index.html')">_hello</a></li>
+            <li><a href="#" onclick="loadPage(event, 'templates/writeups.html')">_writeups</a></li>
+            <li><a href="#" onclick="loadPage(event, 'templates/blog.html')">_blog</a></li>
         </ul>
     </nav>
     <header>
@@ -27,9 +27,16 @@
                     <img src="https://readme-typing-svg.herokuapp.com?color=1e90ff&lines=Pentester;Cybersecurity+Student;Red+Team&center=true&width=500&height=50">
                 </a>
             </div>
-            <p>Passionate about technology and programming, I am currently a dedicated student of computer systems engineering with extensive knowledge in cybersecurity, specializing in Red Teaming. Driven by a relentless desire to learn, excel, and contribute to transformative projects, I am eager to leave a significant mark in the world of technology. Originally from Mexico, I invite you to join me on this journey of innovation and exploration.</p>
+            <p>Passionate about technology and programming, I am currently a dedicated student of computer systems
+                engineering with extensive knowledge in cybersecurity, specializing in Red Teaming. Driven by a
+                relentless desire to learn, excel, and contribute to transformative projects, I am eager to leave a
+                significant mark in the world of technology. Originally from Mexico, I invite you to join me on this
+                journey of innovation and exploration.</p>
         </div>
     </header>
+    <div id="loading" style="display: none;">
+        <div class="loader"></div>
+    </div>
     <footer>
         <div class="social-links">
             <a target="_blank" href="https://github.com/JJoosh"><i class="fab fa-github"></i></a>
@@ -37,11 +44,6 @@
             <a target="_blank" href="mailto:joshuaavi@proton.me"><i class="fas fa-envelope"></i></a>
         </div>
     </footer>
-    <script>
-        function toggleMenu() {
-            const navLinks = document.getElementById('nav-links');
-            navLinks.classList.toggle('active');
-        }
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
