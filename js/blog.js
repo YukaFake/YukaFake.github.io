@@ -140,7 +140,7 @@ shell.interactive()
                     <img src="https://github.com/user-attachments/assets/3d03a612-1dd9-44b4-83f5-a0e05a564dff" alt="Shell Execution" />
 
                     <p>El exploit mediante un bucle for pasa como primer argumento que es la posición el iterador de 0 a 7 y le pasa a su vez el valor que esta en esa posición de la string cmd, como valor de retorno usamos el stack pivot para limpiar la pila y vuelva a ejecutar la siguiente función</p>
-                    <img src="https://github.com/user-attachments/assets/4649f48b-3de9-4a4a-b925-ad9c7781ba65" alt="Shell Execution" />
+                    
 
                                     <div class="code-block">
                     <pre><code>
@@ -174,7 +174,7 @@ shell.interactive()
                     <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
                 </div>
                     <p>Al terminar la ejecución de la primera llamada a la función limpia 2 bytes como se muestra en la imagen y retorna a la función updateCommand del siguiente valor</p>
-                    <img src="https://github.com/user-attachments/assets/d16b5826-5157-4805-8766-2c81c327f047" alt="Shell Execution" />
+                   <img src="https://github.com/user-attachments/assets/4649f48b-3de9-4a4a-b925-ad9c7781ba65" alt="Shell Execution" />
 
                     
                     <p>En la ultima llamada a execCommand ya hemos modificado la string del simbolo command a /bin/sh por lo que al ejecutarlo con system obtenemos una shell</p>
