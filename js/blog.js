@@ -128,6 +128,9 @@ shell.recvlines(2)
 
 shell.interactive()
                     </code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+                </div>
+                    
                     <p>Iniciamos intentando escribir un solo byte, en este caso al inicio de la llamada de updateCommand el primer valor en el stack será la dirección donde volverá una vez termine la llamada y los siguientes 2 valores son los argumentos en este paso le pasamos como argumento la posición 0 del simbolo command y como valor a escribir el byte 0x2f o /</p>
                     <img src="https://github.com/user-attachments/assets/16b1bb7e-ea60-4460-abe7-d920eeb7c256" alt="Shell Execution" />
 
@@ -168,6 +171,8 @@ shell.recvlines(2)
 
 shell.interactive()
                     </code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+                </div>
                     <p>Al terminar la ejecución de la primera llamada a la función limpia 2 bytes como se muestra en la imagen y retorna a la función updateCommand del siguiente valor</p>
                     <img src="https://github.com/user-attachments/assets/d16b5826-5157-4805-8766-2c81c327f047" alt="Shell Execution" />
 
@@ -204,6 +209,8 @@ shell.recvlines(2)
 
 shell.interactive()
                     </code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+                </div>
                     <img src="https://github.com/user-attachments/assets/c646b120-9a12-4069-bbf3-b06104c72eb9" alt="Shell Execution" /> 
                     
 
