@@ -267,7 +267,7 @@ Running without configuration file.
 <p>En la barra de menú, haremos clic en <i>archivo</i> > <i>Nuevo archivo de texto</i>. Entonces lo haremos guarde el archivo vacío como <b>config.Biblioteca-ms</b> en el <i>offsec</i> del usuario de oficina. Tan pronto como guardemos el archivo con esta extensión de archivo, se muestra con un icono. Si bien el ícono no parece peligroso, Windows no lo utiliza habitualmente y, por lo tanto, puede generar sospechas. Para aumentar las posibilidades de que nuestra víctima ejecute nuestro archivo, vamos a cambiar su apariencia.</p><img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/d851cb673201245bd941d1299e76461d-csa_sc_vscempty3.png"/>
 
 <p>El La siguiente lista muestra el XML completo.:</p>
-<img src="https://raw.githubusercontent.com/JJoosh/JJoosh.github.io/refs/heads/main/img/Library.png/>
+<img src="https://raw.githubusercontent.com/JJoosh/JJoosh.github.io/refs/heads/main/img/Library.png"/>
 
 <p>Guardemos y cerremos el archivo en Visual Studio Code. Entonces lo haremos haga doble clic en <b>config.Biblioteca-ms</b> archivo en el escritorio.</p>
 <img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/7624182b026f1ec571a6f48745f17a76-csa_sc_openlib.png"/>
