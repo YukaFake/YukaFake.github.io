@@ -224,9 +224,10 @@ shell.interactive()
             title: 'Abusing Windows Library Files',
             date: 'January 14, 2025',
             content: `
-            A continuación, ejecutaremos WsgiDAV desde el **/inicio/kali/.local/bin** directorio. En el caso de que WsgiDAV se haya instalado mediante apt, la instalación el camino difiere y _WsgiDAV_ debe usarse como comando para iniciar el servidor durante todo el curso. El primer parámetro que proporcionaremos es **--anfitrión**, que especifica el host desde el que servir. vamos a escuchar todas las interfaces con **0.0.0.0**. A continuación, especificaremos la escucha. puerto con **--puerto=80** y deshabilitar la autenticación en nuestro recurso compartido con **--autenticación = anónimo**. Finalmente, configuraremos la raíz del directorio de nuestro WebDAV compartir con .
+            <p>A continuación, ejecutaremos WsgiDAV desde el **/inicio/kali/.local/bin** directorio. En el caso de que WsgiDAV se haya instalado mediante apt, la instalación el camino difiere y _WsgiDAV_ debe usarse como comando para iniciar el servidor durante todo el curso. El primer parámetro que proporcionaremos es **--anfitrión**, que especifica el host desde el que servir. vamos a escuchar todas las interfaces con **0.0.0.0**. A continuación, especificaremos la escucha. puerto con **--puerto=80** y deshabilitar la autenticación en nuestro recurso compartido con **--autenticación = anónimo**. Finalmente, configuraremos la raíz del directorio de nuestro WebDAV compartir.</p>
 
-```bash
+<div class="code-block">
+<pre><code>
 kali@kali:~$ mkdir /home/kali/webdav
 
 kali@kali:~$ touch /home/kali/webdav/test.txt
@@ -246,8 +247,9 @@ Running without configuration file.
 17:41:53.920 - WARNING : Share '/:dir_browser' will allow anonymous read access.
 17:41:54.348 - INFO    : Running WsgiDAV/4.0.1 Cheroot/8.5.2+ds1 Python 3.9.10
 17:41:54.348 - INFO    : Serving on http://0.0.0.0:80 ..
-```
-            
+</code></pre>
+<button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+</div>            
             `
         }
     ];
