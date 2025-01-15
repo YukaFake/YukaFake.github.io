@@ -256,7 +256,7 @@ Running without configuration file.
 <br>
 
 <p>A continuación, creemos el archivo de biblioteca de Windows. usaremos **xfreerdp** a conectarse al _Cliente137_ máquina en **192.168.50.194** a través de RDP a preparar nuestro ataque. Podemos conectarnos al sistema con _offsec_ como el nombre de usuario y _Laboratorio_ como contraseña. Esto hará que sea mucho más fácil para para construir y probar nuestro archivo de biblioteca, y más tarde, nuestro archivo de acceso directo.
-Una vez conectados, encontraremos el _Código de estudio visual_ (VSC)[5](https://portal.offsec.com/courses/pen-200-44065/learning/client-side-attacks-48976/abusing-windows-library-files-49009/obtaining-code-execution-via-windows-library-files-48979#fn-local_id_430-5) aplicación en el escritorio, que usaremos para crear nuestra biblioteca archivo. Debemos tener en cuenta que también podríamos utilizar _Bloc_ para crear el archivo. Abramos VSC haciendo doble clic en el icono.</p>
+Una vez conectados, encontraremos el Código de estudio visual aplicación en el escritorio, que usaremos para crear nuestra biblioteca archivo. Debemos tener en cuenta que también podríamos utilizar Bloc de notas para crear el archivo. Abramos VSC haciendo doble clic en el icono.</p>
 <img src="https://static.offsec.com/offsec-courses/PEN-200/imgs/clientsideattacks/3c18f3689192eac43f9352a542fdba2c-csa_sc_win112.png"/>
 <br>
 
