@@ -321,7 +321,7 @@ sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com --att
 </code></pre>
 <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
 </div> 
-<img src="https://github.com/JJoosh/JJoosh.github.io/blob/main/img/WhatsApp%20Image%202025-01-14%20at%2015.35.26_d56f6322.jpg"/>
+<img src="https://raw.githubusercontent.com/JJoosh/JJoosh.github.io/refs/heads/main/img/WhatsApp%20Image%202025-01-14%20at%2015.35.26_d56f6322.jpg"/>
 
             `
         }
