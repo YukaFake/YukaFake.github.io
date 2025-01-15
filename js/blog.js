@@ -218,7 +218,7 @@ shell.interactive()
                     <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
                 </div>
             `
-        }
+        },
         {
             id: 3,
             title: 'Abusing Windows Library Files',
@@ -291,7 +291,7 @@ PS C:\Windows\System32\WindowsPowerShell\v1.0>
         }
     ];
 
-    document.querySelectorAll('.read-more').forEach(button => {
+ document.querySelectorAll('.read-more').forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const postId = this.parentElement.getAttribute('data-id');
@@ -341,3 +341,4 @@ function copyCode(button) {
 
     window.getSelection().removeAllRanges();
 }
+
