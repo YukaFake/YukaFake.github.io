@@ -8,15 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
+        .post {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
         .post img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            margin-right: 10px;
-            vertical-align: middle;
+            margin-right: 15px;
         }
-        .post h2 {
-            display: inline;
+        .post-content {
+            display: flex;
+            flex-direction: column;
         }
         .translate-button {
             margin-top: 10px;
@@ -51,10 +59,12 @@
     <main id="writeups-main">
         <div class="blog-posts">
             <div class="post" data-id="2">
-                <img src="../img/Access/access_logo.png" alt="HTB Access">
-                <h2>HTB - Access</h2>
-                <p class="excerpt">Acces es una maquina de dificultad Facil con temas de Hacking AD</p>
-                <a href="#" class="read-more" onclick="loadMarkdown(event, 'Access.md')">Read More</a>
+                <img src="../img/Access/0.png" alt="HTB Access">
+                <div class="post-content">
+                    <h2>HTB - Access</h2>
+                    <p class="excerpt">Acces es una maquina de dificultad Facil con temas de Hacking AD</p>
+                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Access.md')">Read More</a>
+                </div>
             </div>
         </div>
 
