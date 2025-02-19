@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="../css/blog-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .post img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .post h2 {
+            display: inline;
+        }
+        .translate-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -30,6 +51,7 @@
     <main id="writeups-main">
         <div class="blog-posts">
             <div class="post" data-id="2">
+                <img src="../img/Access/0.png" alt="HTB Access">
                 <h2>HTB - Access</h2>
                 <p class="excerpt">Acces es una maquina de dificultad Facil con temas de Hacking AD</p>
                 <a href="#" class="read-more" onclick="loadMarkdown(event, 'Access.md')">Read More</a>
@@ -38,6 +60,7 @@
 
         <div id="full-post" style="display: none;">
             <a href="#" onclick="hideMarkdown()" class="back-button">⬅ Volver</a>
+            <button class="translate-button" onclick="translatePost()">Translate to English</button>
             <div id="post-content" class="markdown-content"></div>
         </div>
     </main>
@@ -71,6 +94,16 @@
 
         function toggleMenu() {
             document.getElementById('nav-links').classList.toggle('active');
+        }
+
+        function translatePost() {
+            let content = document.getElementById('post-content').innerText;
+            fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(content)}&langpair=es|en`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('post-content').innerText = data.responseData.translatedText;
+                })
+                .catch(error => console.error('Error al traducir:', error));
         }
     </script>
 </body>
