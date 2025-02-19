@@ -146,15 +146,6 @@
             document.getElementById('nav-links').classList.toggle('active');
         }
 
-        function translatePost() {
-            let content = document.getElementById('post-content').innerText;
-            fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(content)}&langpair=es|en`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('post-content').innerText = data.responseData.translatedText;
-                })
-                .catch(error => console.error('Error al traducir:', error));
-        }
     </script>
 </body>
 </html>
