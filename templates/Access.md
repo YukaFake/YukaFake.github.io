@@ -81,7 +81,7 @@ Con esta nueva información, intentamos nuevamente autenticarnos en **Telnet**, 
 ![](../img/Access/13.png)
 <span class="center-text">Flag user</span>
 
-# Privilege Escaltaion
+### Privilege Escaltaion
 
 Durante nuestra enumeración del sistema, identificamos un **archivo interesante** en el directorio **`Public/Desktop`**. Al analizarlo, notamos que se trata de un **acceso directo (`.lnk`)** que ejecuta comandos mediante `runas`, lo que indica que podría utilizarse para ejecutar procesos con **privilegios de administrador**.
 
