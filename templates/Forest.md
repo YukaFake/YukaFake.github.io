@@ -1,4 +1,4 @@
-![[Pasted image 20250209000235.png]]
+![](../img/Forest/0.png)
 
 #Windows #AD #BloodHound #WriteDCL #AbusoDeWriteDCL
 ____
@@ -12,13 +12,13 @@ ___
 
 Se precede a validar conectividad con la maquina para corroborar así correcto alcance al objetivo
 
-![[Pasted image 20250209000515.png]]
+![](../img/Forest/1.png)
 
 > *Comprobación de alcance al objetivo*
 
 Posteriormente se elaboro un escaneo de todos los puerto usando la herramienta *RUSTSCAN* con la intención de buscar algun servicio vulnerable o algún punto de apoyo para un acceso inicial
 
-![[Pasted image 20250209000647.png]]
+![](../img/Forest/2.png)
 
 > *Escaneo con nmap*
 
@@ -28,13 +28,13 @@ En los escaneo no se logra identificar nada interesante más que el nombre del d
 
 Con ayuda de la herramienta netxec procedemos a enumerar usuarios, ya que hemos corroborado que tenemos acceso como usuario anónimo 
 
-![[Pasted image 20250209001135.png]]
+![](../img/Forest/3.png)
 
 > *Enumeración de usuarios*
 
 Con los usuarios encontrados, validamos con la herramienta ***kerberbrute*** para ver si son validos, los cuales los siguientes fueron validos
 
-![[Pasted image 20250209001308.png]]
+![](../img/Forest/4.png)
 
 > *Validación de usuarios en el sistema*
 
@@ -42,25 +42,25 @@ Con los usuarios encontrados, validamos con la herramienta ***kerberbrute*** par
 
 Con una lista potencial de usuarios y el puerto de Kerberos abierto, procedemos a realizar un ataque **AS-REP Roasting**. Este ataque consiste en solicitar un Ticket Granting Ticket (TGT) para usuarios que no requieren preautenticación, lo que nos permite obtener un hash cifrado de su contraseña. Posteriormente, este hash puede ser crackeado offline para recuperar la contraseña en texto plano del usuario vulnerable.
 
-![[Pasted image 20250209001500.png]]
+![](../img/Forest/5.png)
 
 > *ASP-Roasting Attack*
 
 Se logro obtener un ticket TGT del usuario *svs-alfresco* por lo que con ayuda de hashcat, se procede a romperlo dando la siguiente contraseña
 
-![[Pasted image 20250209001627.png]]
+![](../img/Forest/6.png)
 
 > *Contraseña del usuario svc-alfresco
 
 Con un usuario y una contraseña procedemos a validar si es útil para poder conectarnos remotamente, nuevamente usando netxec con el argumento winrm
 
-![[Pasted image 20250209001753.png]]
+![](../img/Forest/7.png)
 
 > *Usuario con acceso a conexion remota*
 
 Al nota que nos aparece el mensaje **Pwn3d!** confirmamos que tenemos acceso por winrm por lo que nos procedemos a conectar para estar dentro y capturar la flag de user, si es el caso
 
-![[Pasted image 20250209001935.png]]
+![](../img/Forest/8.png)
 
 > *Flag de user*
 
@@ -69,7 +69,7 @@ Al nota que nos aparece el mensaje **Pwn3d!** confirmamos que tenemos acceso por
 Para la escalada de privilegios, utilizamos **BloodHound**, ya que contamos con credenciales válidas de un usuario.
 Tras analizar los resultados, identificamos un posible camino de escalada que nos permite obtener privilegios de **Domain Admin**, lo que nos brinda control total sobre el dominio.
 
-![[Pasted image 20250209002301.png]]
+![](../img/Forest/9.png)
 
 > *Posible escalada de privilegios*
 
@@ -116,11 +116,11 @@ Add-DomainObjectAcl -Credential $Cred -PrincipalIdentity yukafake -Rights DCSync
 
 Luego haber esta seria de pasos, ahora con la herramienta de impacket llamada secretdump, dumpeamos el hash NTLM de administrador, para conectarnos por evil-winrm y obtner la flag de root
 
-![[Pasted image 20250209000445.png]]
+![](../img/Forest/10.png)
 
 > *Obtención de hash de administrador*
 
-![[Pasted image 20250209004256.png]]
+![](../img/Forest/11.png)
 
 > *Flag administrador*
 
