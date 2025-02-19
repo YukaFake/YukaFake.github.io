@@ -6,6 +6,7 @@
     <title>Writeups - YukaFake</title>
     <link rel="stylesheet" href="../css/blog-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <nav>
@@ -18,30 +19,29 @@
             <li><a href="#" onclick="loadPage(event, 'blog.html')">_blog</a></li>
         </ul>
     </nav>
+
     <header>
         <div class="content">
             <h1>Writeups</h1>
-            <p>¡Bienvenido a la sección de Writeup! Espero que encuentres algo interesante y educativo aquí. Aunque el contenido puede parecer técnico o complejo al principio, estoy seguro de que te sorprenderás con lo que puedes aprender. ¡Vamos a explorar juntos!</p>
+            <p>¡Bienvenido a la sección de Writeups! Espero que encuentres algo interesante y educativo aquí.</p>
         </div>
     </header>
+
     <main id="writeups-main">
         <div class="blog-posts">
             <div class="post" data-id="2">
-                <h2>C2_Server_Pwning - HackDefender 2024</h2>
-                <p class="date">Octubre 13, 2024</p>
-                <p class="excerpt">Este es un write up de uno de los retos mas desafiantes que hubo durante el HackDefender 2024, llevado a acabo de  GDL
-                </p>
-                <a href="#" class="read-more">Read More</a>
+                <h2>HTB - Access</h2>
+                <p class="excerpt">Acces es una maquina de dificultad Facil con temas de Hacking AD</p>
+                <a href="#" class="read-more" onclick="loadMarkdown(event, 'Access.md')">Read More</a>
             </div>
-            <!-- More blog posts can be added here -->
         </div>
-<div id="full-post" style="display: none;">
-    <div id="post-content"></div>
-</div>
+
+        <div id="full-post" style="display: none;">
+            <a href="#" onclick="hideMarkdown()" class="back-button">⬅ Volver</a>
+            <div id="post-content" class="markdown-content"></div>
+        </div>
     </main>
-    <div id="loading" style="display: none;">
-        <div class="loader"></div>
-    </div>
+
     <footer>
         <div class="social-links">
             <a target="_blank" href="https://github.com/JJoosh"><i class="fab fa-github"></i></a>
@@ -49,7 +49,29 @@
             <a target="_blank" href="mailto:joshuaavi@proton.me"><i class="fas fa-envelope"></i></a>
         </div>
     </footer>
-    <script src="../js/script.js"></script>
-    <script src="../js/blog.js"></script>		
+
+    <script>
+        function loadMarkdown(event, file) {
+            event.preventDefault();
+            fetch(file)
+                .then(response => response.text())
+                .then(markdown => {
+                    document.querySelector('.blog-posts').style.display = 'none';
+                    document.getElementById('full-post').style.display = 'block';
+                    document.getElementById('post-content').innerHTML = marked.parse(markdown);
+                })
+                .catch(error => console.error('Error al cargar el Markdown:', error));
+        }
+
+        function hideMarkdown() {
+            document.querySelector('.blog-posts').style.display = 'block';
+            document.getElementById('full-post').style.display = 'none';
+            document.getElementById('post-content').innerHTML = '';
+        }
+
+        function toggleMenu() {
+            document.getElementById('nav-links').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
