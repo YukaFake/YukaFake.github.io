@@ -111,7 +111,7 @@
                 <div class="post-content">
                     <h2>HTB - Support</h2>
                     <p class="excerpt">Support es una máquina Windows de Easy difficulty que cuenta con un recurso compartido SMB que permite la autenticación anónima. Tras conectarse al recurso compartido, se descubre un archivo ejecutable que se utiliza para consultar el servidor LDAP de la máquina en busca de usuarios disponibles. Mediante ingeniería inversa, análisis de red o emulación, se identifica la contraseña que el binario utiliza para enlazar el servidor LDAP y que puede utilizarse para realizar más consultas LDAP. Se identifica un usuario llamado `support` en la lista de usuarios, y se encuentra que el campo `info` contiene su contraseña, permitiendo así una conexión WinRM a la máquina. Una vez en la máquina, la información del dominio puede ser recogida a través de `SharpHound`, y `BloodHound` revela que el grupo `Shared Support Accounts` del que el usuario `support` es miembro, tiene privilegios `GenericAll` en el Controlador de Dominio. Se realiza un ataque de Delegación Restringida Basada en Recursos, y se recibe un shell como `NT Authority\System`.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Access.md')">Read More</a>
+                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Support.md')">Read More</a>
                 </div>
             </div>
         </div> 
