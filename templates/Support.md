@@ -1,4 +1,4 @@
-![[Pasted image 20250103121018.png]]
+![](../img/Support/0.png)
 
 #Windows #Easy #dnspyy #breakpoint #GenericAll #powermand #PowerView #getST
 ___
@@ -10,85 +10,99 @@ ___
 
 Se realizó un escaneo de la red con RustScan para identificar los puertos abiertos y los servicios en ejecución.
 
-![](Pasted%20image%2020250217223659.png)
+![](../img/Support/1.png)
+
 <span class="center-text">Escaneo con Rustscan</span>
 
 Como parte del proceso de enumeración, se verificó la existencia de recursos compartidos accesibles de forma anónima, obteniendo los siguientes resultados:
 
-![](Pasted%20image%2020250217223850.png)
+![](../img/Support/2.png)
+
 <span class="center-text">Recurso compartido encontrado</span>
 
 Una vez identificado el recurso, se estableció conexión mediante `smbclient`, donde se encontró un directorio que contenía un archivo ZIP. Este archivo parecía incluir un ejecutable, por lo que se procedió a descargarlo para su análisis.
 
-![](Pasted%20image%2020250217224020.png)
+![](../img/Support/3.png)
+
 <span class="center-text">Archivo interesante</span>
 
 Una vez descargado en nuestro sistema, se procedió a descomprimir el archivo para analizar su contenido.
 
-![](Pasted%20image%2020250217224103.png)
+![](../img/Support/4.png)
 <span class="center-text">Contenido del zip</span>
 
 Al confirmar que se trata de un archivo ejecutable (`.exe`), se trasladó a un entorno Windows para ejecutarlo y analizar su comportamiento en profundidad.
 
 Al ejecutar el exe se observa que existen 2 modos uno denominado find y el otro user, se procede a interactuar con cada uno para analizar su funcion
 
-![](Pasted%20image%2020250217225630.png)
+![](../img/Support/5.png)
 <span class="center-text">Interactuando con el programa</span>
 
 Se identificó que el programa permite buscar usuarios por su primer y último apellido, así como por su nombre. Sin embargo, la interacción con la aplicación es limitada debido a la falta de conexión a la VPN de HTB. Para superar esta restricción, se procedió a desensamblar el ejecutable utilizando `dnSpy`, lo que permitió identificar varias funciones clave. Entre ellas, la más relevante es `ldapQuery`, ya que revela la consulta de un usuario al servicio LDAP, lo que podría proporcionar información valiosa sobre la autenticación y estructura del directorio.
 
-![](Pasted%20image%2020250217230103.png)
+![](../img/Support/6.png)
+
 <span class="center-text">Desamoblando exe e identificación de una función interesante</span>
 
 Se identificó que el usuario utilizado en la consulta LDAP es **"ldap"**, y la contraseña se pasa como argumento. Para obtener más información, se estableció un **breakpoint** en el código y se inició el proceso de depuración. El objetivo es interceptar la ejecución del programa y observar si la contraseña se encuentra en **texto plano** cuando es procesada en memoria, lo que podría permitir su extracción y posterior uso para autenticación.
 
-![](Pasted%20image%2020250217230338.png)
+![](../img/Support/7.png)
+
 <span class="center-text">Breakpoint establecido</span>
 
 Con el **breakpoint** establecido y los argumentos adecuados para la ejecución del programa, se procedió a iniciarlo en modo depuración. Durante la ejecución, se logró interceptar el momento en que la contraseña del usuario **ldap** es procesada en memoria, permitiendo su extracción en **texto plano**.
 
-![](Pasted%20image%2020250217230447.png)
+![](../img/Support/8.png)
+
 <span class="center-text">Obtención de contraseña en texto claro</span>
 
 Utilizando la herramienta **nexec**, se procedió a validar las credenciales obtenidas. Para ello, se ingresó el usuario **support** junto con la contraseña, previamente codificada, como argumento en la ejecución. Este proceso permitió confirmar la autenticidad de las credenciales y verificar el acceso con éxito.
 
-![](Pasted%20image%2020250217230939.png)<span class="center-text">Validación de usuario con la contraseña encontrada</span>
+![](../img/Support/9.png)
+
+<span class="center-text">Validación de usuario con la contraseña encontrada</span>
 
 Se logro observar que ahora hemos obtenido una contraseña y un usuario, ahora empezamos a enumerar más información tirando de nexec para enumerar ldap
 
-![](Pasted%20image%2020250217231241.png)
+![](../img/Support/10.png)
+
 <span class="center-text">Obteniendo información acerca del dominio</span>
 
 Una vez extraída la información, se llevó a cabo un análisis detallado, identificando que el usuario de interés para obtener acceso es **support**. Este usuario pertenece al grupo **Remote Management Users**, lo que le otorga privilegios para acceder al sistema de forma remota. Con este hallazgo, se utilizó la herramienta **ldapsearch** para recopilar más información sobre la cuenta, con el objetivo de evaluar posibles vectores de acceso.
 
-![](Pasted%20image%2020250217232306.png)
+![](../img/Support/11.png)
+
 <span class="center-text">Usuario objetivo</span>
 
-![](Pasted%20image%2020250217232651.png)
+![](../img/Support/12.png)
+
 <span class="center-text">Posible contraseña</span>
 
 Una vez investigado este usuario notamos que tiene un campo diferente al del resto, por lo que procedemos validar si no es una contraseña para ello nuevamnete usamo nexec para la confirmación
 
-![](Pasted%20image%2020250217232827.png)
+![](../img/Support/13.png)
+
 <span class="center-text">Validación exitosa</span>
 
 Con esta validación hecha procedemos a entrar al sistema y capturar la flag de user
 
-![](Pasted%20image%2020250217232956.png)
+![](../img/Support/14.png)
+
 <span class="center-text">User flag</span>
 
 # Privilege Escalation
 
 Para la **escalada de privilegios**, al contar con credenciales válidas del usuario **support**, se procedió a ejecutar **SharpHound**. Esta herramienta permitió recopilar información detallada sobre la infraestructura del dominio, identificando posibles **vectores de ataque** que podrían facilitar la escalada de privilegios dentro del sistema.
 
-![](Pasted%20image%2020250217233456.png)
+![](../img/Support/15.png)
+
 <span class="center-text">Resultados de SharpHound</span>
 
 Se transfirió el archivo **ZIP** generado por **SharpHound** a nuestro sistema local y se procedió a analizarlo utilizando **BloodHound**. Esta herramienta permitió visualizar las relaciones y permisos dentro del dominio, identificando posibles rutas de **escalada de privilegios** basadas en los privilegios del usuario **support**.
 
 Despúes de un analices identificamos que el usuario support es miembro del grupo de Shared Support account y este miembre tiene privilegios GenericAll sobre el equipo, por lo que absuando de este privilegios podemos llegar hacer Administradores de dominio pero para ello necesitaremos primero preparar nuestro entorno por lo que empezamos a transferirnos las herramientas a usar en este caso
 
-![](Pasted%20image%2020250217234016.png)
+![](../img/Support/16.png)
 
 Para empezar a abusar del Resource-based Constrained Delegation primero describamos que es este tipo de abuso
 
@@ -133,12 +147,14 @@ Get-DomainComputer dc | Set-DomainObject -Set @{'msds-allowedtoactonbehalfofothe
 
 Seguimos estos pasos y se debería ver de la siguiente manera
 
-![](Pasted%20image%2020250220232956.png)
+![](../img/Support/17.png)
+
 *Preparación para el abuso del privilegio GenericAll*
 
 En nuestra maquina de atacante lo que hacemos ahora es lo siguiente:
 
-![](Pasted%20image%2020250220233021.png)
+![](../img/Support/18.png)
+
 *Solicitud de ticket de servicio*
 
 #### **Desglose de los parámetros:**
@@ -152,7 +168,8 @@ En nuestra maquina de atacante lo que hacemos ahora es lo siguiente:
 Si todo sale bien ahora podemos ingresar al controlador de dominio haciendo lo siguiente
 
 
-![](Pasted%20image%2020250220233032.png)
+![](../img/Support/19.png)
+
 *Ingreso al sistema como Administrador*
 
 - `KRB5CCNAME=Administrator@cifs_dc.support.htb@SUPPORT.HTB.ccache`
@@ -175,5 +192,6 @@ Si todo sale bien ahora podemos ingresar al controlador de dominio haciendo lo s
 
 Y al final capturamos la flag Administrator
 
-![](Pasted%20image%2020250220233124.png)
+![](../img/Support/20.png)
+
 *Flag root*
