@@ -154,6 +154,28 @@ Traducción realizada con la versión gratuita del traductor DeepL.com</p>
             document.getElementById('nav-links').classList.toggle('active');
         }
 
+        function loadMarkdown(event, file) {
+    event.preventDefault();
+    fetch(file)
+        .then(response => response.text())
+        .then(markdown => {
+            // Oculta la lista de posts y muestra el contenido del markdown
+            document.querySelector('.blog-posts').style.display = 'none';
+            document.getElementById('full-post').style.display = 'block';
+            document.getElementById('post-content').innerHTML = marked.parse(markdown);
+
+            // Desplazarse al inicio de la pantalla de forma suave
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        })
+        .catch(error => console.error('Error al cargar el Markdown:', error));
+}
+
+
+        
+
     </script>
 </body>
 </html>
