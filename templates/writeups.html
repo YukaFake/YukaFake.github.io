@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="../css/blog-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/shell.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/dos.min.js"></script> <!-- Para CMD -->
-    <script>
-    hljs.highlightAll();
-    </script>
     <style>
         .post {
             display: flex;
@@ -164,16 +158,12 @@ function loadMarkdown(event, file) {
     fetch(file)
         .then(response => response.text())
         .then(markdown => {
+            // Oculta la lista de posts y muestra el contenido del markdown
             document.querySelector('.blog-posts').style.display = 'none';
             document.getElementById('full-post').style.display = 'block';
             document.getElementById('post-content').innerHTML = marked.parse(markdown);
 
-            // Aplicar resaltado de código después de cargar el contenido
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightElement(block);
-            });
-
-            // Desplazarse al inicio de la página de forma suave
+            // Desplazarse al inicio de la pantalla de forma suave
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -181,6 +171,7 @@ function loadMarkdown(event, file) {
         })
         .catch(error => console.error('Error al cargar el Markdown:', error));
 }
+
 
 
         
