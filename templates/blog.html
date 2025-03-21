@@ -7,6 +7,7 @@
     <title>YukaFake Blog</title>
     <link rel="stylesheet" href="../css/blog-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.12/marked.min.js"></script> <!-- Include Markdown library -->
 </head>
 
 <body>
@@ -45,6 +46,13 @@
                 </p>
                 <a href="#" class="read-more">Read More</a>
         </div>
+            <div class="post" data-id="4">
+                <h2>Preparación para el examen OSCP</h2>
+                <p class="date">Marzo 21, 2025</p>
+                <p class="excerpt">En este post, te compartiré una guía detallada sobre cómo prepararte para el examen OSCP, incluyendo consejos prácticos y recursos útiles que te ayudarán a aprobar la certificación.
+                </p>
+                <a href="#" class="read-more" onclick="loadMarkdown('oscp-preparation.md')">Read More</a>
+            </div>
             <!-- More blog posts can be added here -->
         </div>
         <div id="full-post" style="display: none;">
@@ -64,6 +72,26 @@
     </footer>
     <script src="../js/script.js"></script>
     <script src="../js/blog.js"></script>
+        <script>
+        function loadMarkdown(file) {
+            document.getElementById('loading').style.display = 'block'; // Show loader
+            fetch(file)
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById('post-content').innerHTML = marked(text); // Convert Markdown to HTML
+                    document.getElementById('loading').style.display = 'none'; // Hide loader
+                    document.getElementById('full-post').style.display = 'block'; // Show full post
+                })
+                .catch(err => {
+                    console.error('Error loading markdown file:', err);
+                    document.getElementById('loading').style.display = 'none'; // Hide loader on error
+                });
+        }
+
+        document.getElementById('back-to-blog').addEventListener('click', function () {
+            document.getElementById('full-post').style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>
