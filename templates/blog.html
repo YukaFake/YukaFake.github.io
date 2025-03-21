@@ -51,7 +51,7 @@
                 <p class="date">Marzo 21, 2025</p>
                 <p class="excerpt">En este post, te compartiré mi experiencia con esta certificación, asi como algunos consejos y trucos y puntos de vista sobre la misma
                 </p>
-                <a href="#" class="read-more" onclick="loadMarkdown('oscp-preparation.md')">Read More</a>
+                <a href="#" class="read-more" onclick="loadMarkdown(event, 'oscp-preparation.md')">Read More</a>
             </div>
             <!-- More blog posts can be added here -->
         </div>
@@ -73,24 +73,48 @@
     <script src="../js/script.js"></script>
     <script src="../js/blog.js"></script>
         <script>
-        function loadMarkdown(file) {
-            document.getElementById('loading').style.display = 'block'; // Show loader
+    <script>
+        function loadMarkdown(event, file) {
+            event.preventDefault();
             fetch(file)
                 .then(response => response.text())
-                .then(text => {
-                    document.getElementById('post-content').innerHTML = marked(text); // Convert Markdown to HTML
-                    document.getElementById('loading').style.display = 'none'; // Hide loader
-                    document.getElementById('full-post').style.display = 'block'; // Show full post
+                .then(markdown => {
+                    document.querySelector('.blog-posts').style.display = 'none';
+                    document.getElementById('full-post').style.display = 'block';
+                    document.getElementById('post-content').innerHTML = marked.parse(markdown);
                 })
-                .catch(err => {
-                    console.error('Error loading markdown file:', err);
-                    document.getElementById('loading').style.display = 'none'; // Hide loader on error
-                });
+                .catch(error => console.error('Error al cargar el Markdown:', error));
         }
 
-        document.getElementById('back-to-blog').addEventListener('click', function () {
+        function hideMarkdown() {
+            document.querySelector('.blog-posts').style.display = 'block';
             document.getElementById('full-post').style.display = 'none';
-        });
+            document.getElementById('post-content').innerHTML = '';
+        }
+
+        function toggleMenu() {
+            document.getElementById('nav-links').classList.toggle('active');
+        }
+
+function loadMarkdown(event, file) {
+    event.preventDefault();
+    fetch(file)
+        .then(response => response.text())
+        .then(markdown => {
+            // Oculta la lista de posts y muestra el contenido del markdown
+            document.querySelector('.blog-posts').style.display = 'none';
+            document.getElementById('full-post').style.display = 'block';
+            document.getElementById('post-content').innerHTML = marked.parse(markdown);
+
+            // Desplazarse al inicio de la pantalla de forma suave
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        })
+        .catch(error => console.error('Error al cargar el Markdown:', error));
+}
+
     </script>
 </body>
 
