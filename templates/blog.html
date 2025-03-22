@@ -51,7 +51,7 @@
                 <p class="date">Marzo 21, 2025</p>
                 <p class="excerpt">En este post, te compartiré mi experiencia con esta certificación, asi como algunos consejos y trucos y puntos de vista sobre la misma
                 </p>
-                <a href="#" class="read-more" onclick="loadMarkdown(event, 'oscp-preparation.md')">Read More</a>
+                <a href="#" class="read-more" onclick="openMarkdownInNewWindow('oscp-preparation.md')">Read More</a>
             </div>
             <!-- More blog posts can be added here -->
         </div>
@@ -113,6 +113,38 @@ function loadMarkdown(event, file) {
         })
         .catch(error => console.error('Error al cargar el Markdown:', error));
 }
+
+                <script>
+        function openMarkdownInNewWindow(file) {
+            // Open a new window
+            const newWindow = window.open('', '_blank', 'width=800,height=600');
+
+            // Add basic HTML structure with Arial font
+            newWindow.document.write(`
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Markdown Content</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Loading content...</h1>
+                    </body>
+                </html>
+            `);
+
+            // Fetch the markdown content and inject into the new window
+            fetch(file)
+                .then(response => response.text())
+                .then(markdown => {
+                    newWindow.document.body.innerHTML = marked.parse(markdown); // Convert Markdown to HTML
+                })
+                .catch(error => console.error('Error al cargar el Markdown:', error));
+        }
+    </script>
     </script>
 </body>
 
