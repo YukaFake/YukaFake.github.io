@@ -325,7 +325,7 @@ sudo swaks -t dave.wizzard@supermagicorp.com --from test@supermagicorp.com --att
         }
     ];
 
- document.querySelectorAll('.read-more').forEach(button => {
+ document.querySelectorAll('.enlace').forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const postId = this.parentElement.getAttribute('data-id');
