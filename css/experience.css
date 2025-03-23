@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --var-black: #131418;
+    --var-wray: #666666;
+    --var-white: #ffff;
+}
+
+.div-1200 {
+    margin: auto;
+    width: 1200px;
+    max-width: 100%;
+    padding: 20px 10px;
+}
+
+.content {
+}
+
+body {
+    background-color: var(--var-black);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+.div-nav {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.img-nav {
+    display: inline-block;
+    width: 50px;
+    cursor: pointer;
+}
+
+.a-nav {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--var-wray);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.div-nav a:hover {
+    color: var(--var-white);
+}
+
+/* Estilos generales para el contenido Markdown */
+#post-content {
+    font-family: "Arial", sans-serif;
+    color: #ddd;  /* Color de texto (ajústalo según el fondo) */
+    line-height: 1.6;
+    padding: 20px;
+    background-color: var(--var-black); /* Fondo oscuro */
+    border-radius: 8px;
+}
+
+/* Estilizar encabezados */
+#post-content h1 {
+    color: var(--var-white); /* Verde estilo "Matrix" */
+    font-size: 2rem;
+    border-bottom: 2px solid var(--var-white);
+    padding-bottom: 5px;
+}
+
+#post-content h2 {
+    color: var(--var-white);
+    font-size: 1.7rem;
+}
+
+#post-content h3 {
+    color: var(--var-white);
+    font-size: 1.5rem;
+}
+
+/* Estilizar párrafos */
+#post-content p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+/* Estilizar listas */
+#post-content ul, #post-content ol {
+    padding-left: 20px;
+}
+
+#post-content li {
+    margin-bottom: 8px;
+}
+
+/* Código en Markdown */
+#post-content pre {
+    background: #222;
+    color: var(--var-white);
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+#post-content code {
+    background: #333;
+    color: var(--var-white);
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+/* Enlaces */
+#post-content a {
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#post-content a:hover {
+    text-decoration: underline;
+}
+
+/* Citas */
+#post-content blockquote {
+    border-left: 5px solid var(--var-wray);
+    padding-left: 15px;
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Imágenes */
+#post-content img {
+    max-width: 100%;
+    border-radius: 5px;
+    display: block;
+    margin: 10px 0;
+}
+
+#post-content img {
+    width: 700px;
+    /* Tamaño fijo en píxeles */
+    max-width: 100%;
+    /* No sobrepasa el ancho del contenedor */
+    height: auto;
+    /* Mantiene la proporción original */
+    display: block;
+    /* Evita espacios extra debajo de la imagen */
+    margin: 10px auto;
+    /* Centra la imagen horizontalmente */
+    border-radius: 5px;
+    /* Opcional: redondea esquinas */
+}

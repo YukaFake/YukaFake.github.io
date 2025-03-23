@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience</title>
+    <link rel="stylesheet" href="./../css/experience.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <main class="div-1200">
+        <nav>
+            <div class="div-nav">
+                <img class="img-nav" src="./../img/home.png" alt="">
+            </div>
+            <div class="div-nav">
+                <a class="a-nav" href="./../index.html">Hello</a>
+                <a class="a-nav" href="./writeups.html">Writeups</a>
+                <a class="a-nav" href="./blog.html">Blogs</a>
+                <p class="a-nav">|</p>
+                <img class="img-nav" src="./../img/mode.png" alt="">
+            </div>
+        </nav>
+    </main>
+    <main class="div-1200 content" id="post-content">
+        
+    </main>
+
+    <script>
+        function loadMarkdown(file) {
+                fetch(file)
+                    .then(response => response.text())
+                    .then(markdown => {
+                        // Oculta la lista de posts y muestra el contenido del markdown
+                        document.getElementById('post-content').innerHTML = marked.parse(markdown);
+
+                        // Desplazarse al inicio de la pantalla de forma suave
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                })
+            .catch(error => console.error('Error al cargar el Markdown:', error));
+        }
+
+        loadMarkdown("oscp-preparation.md")
+    </script>
+</body>
+</html>

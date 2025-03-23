@@ -35,7 +35,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
-    </style>> <!-- Include Markdown library -->
+    </style> <!-- Include Markdown library -->
 </head>
 <body>
     <nav>
@@ -63,55 +63,76 @@
                 <div class="post-content">
                     <h2>HTB - Access</h2>
                     <p class="excerpt">Access es una máquina de dificultades, que pone de relieve cómo las máquinas asociadas a la seguridad física de un entorno pueden no ser seguras en sí mismas. También se destaca cómo FTP / archivos compartidos accesibles a menudo puede conducir a conseguir un punto de apoyo o movimiento lateral. Enseña técnicas para identificar y explotar las credenciales guardadas.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Access.md')">Read More</a>
+                    
+                    <!--enlace Read More-->
+                    <a href="./informacion.html?archivo=Access.md" class="read-more">Read More</a>
                 </div>
             </div>
-                <div class="post" data-id="3">
+
+            <div class="post" data-id="3">
                 <img src="../img/Active/log.png" alt="HTB Active">
                 <div class="post-content">
                     <h2>HTB - Active</h2>
                     <p class="excerpt">Active es una máquina de dificultad fácil a media, que presenta dos técnicas muy frecuentes para obtener privilegios dentro de un entorno Active Directory.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Active.md')">Read More</a>
+
+                    <!--enlace Read More-->
+                    <a href="./informacion.html?archivo=Active.md" class="read-more">Read More</a>
                 </div>
             </div>
-                <div class="post" data-id="2">
+
+            <div class="post" data-id="2">
                 <img src="../img/Forest/logo.png" alt="HTB Forest">
                 <div class="post-content">
                     <h2>HTB - Forest</h2>
                     <p class="excerpt">Forest en un Controlador de Dominio Windows (DC) de fácil dificultad, para un dominio en el que se ha instalado Exchange Server. Se descubre que el DC permite enlaces LDAP anónimos, que se utilizan para enumerar objetos de dominio. La contraseña de una cuenta de servicio con la preautenticación Kerberos deshabilitada puede ser crackeada para obtener un punto de apoyo. Se descubre que la cuenta de servicio es miembro del grupo Operadores de cuentas, que puede utilizarse para añadir usuarios a grupos privilegiados de Exchange. La pertenencia al grupo Exchange se aprovecha para obtener privilegios DCSync en el dominio y volcar los hashes NTLM.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Forest.md')">Read More</a>
+
+                    <!--enlace Read More-->
+                    <a href="./informacion.html?archivo=Forest.md" class="read-more">Read More</a>
                 </div>
-                </div>
-                <div class="post" data-id="2">
+            </div>
+
+            <div class="post" data-id="2">
                 <img src="../img/Jeeves/logo.png" alt="HTB Access">
                 <div class="post-content">
                     <h2>HTB - Jeeves</h2>
                     <p class="excerpt">Jeeves no es excesivamente complicado, sin embargo se centra en algunas técnicas interesantes y proporciona una gran experiencia de aprendizaje. Como el uso de flujos de datos alternativos no es muy común, algunos usuarios pueden tener dificultades para localizar la ruta de escalado correcta.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Jeeves.md')">Read More</a>
+
+                    <!--enlace Read More-->
+                    <a href="./informacion.html?archivo=Jeeves.md" class="read-more">Read More</a>
+                    <!-- <a href="#" class="read-more" onclick="loadMarkdown(event, 'Jeeves.md')">Read More</a> -->
                 </div>
             </div>
-                <div class="post" data-id="2">
+
+            <div class="post" data-id="2">
                 <img src="../img/Manager/logo.png" alt="HTB Access">
                 <div class="post-content">
                     <h2>HTB - Manager</h2>
                     <p class="excerpt">Manager es una máquina Windows de dificultad media que aloja un entorno Active Directory con AD CS (Active Directory Certificate Services), un servidor web y un servidor SQL. El punto de apoyo consiste en enumerar los usuarios utilizando el ciclo RID y realizar un ataque de rociado de contraseñas para obtener acceso al servicio MSSQL. A continuación, se utiliza el procedimiento `xp_dirtree` para explorar el sistema de archivos, descubriendo una copia de seguridad del sitio web en la raíz web. La extracción de la copia de seguridad revela credenciales que se reutilizan para WinRM en el servidor. Finalmente, el atacante escala privilegios a través de AD CS mediante la explotación ESC7.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Manager.md')">Read More</a>
+
+                    <!--enlace Read More-->
+                    <a href="./informacion.html?archivo=Manager.md" class="read-more">Read More</a>
                 </div>
             </div>
-                        <div class="post" data-id="2">
+            
+            <div class="post" data-id="2">
                 <img src="../img/Heist/logo.png" alt="HTB Heist">
                 <div class="post-content">
                     <h2>HTB - Heist</h2>
                     <p class="excerpt">Heist es una caja Windows de fácil dificultad con un portal accesible en el servidor web, desde el que es posible obtener hashes de contraseñas de Cisco. Estos hashes se descifran y, a continuación, se utilizan la fuerza bruta RID y la pulverización de contraseñas para obtener acceso a la máquina. Se descubre que el usuario ejecuta Firefox. Se puede volcar el proceso firefox.exe y buscar la contraseña del administrador.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Heist.md')">Read More</a>
+
+                    <!--enlace Read More-->
+                    <a href="./informacion.html?archivo=Heist.md" class="read-more">Read More</a>
                 </div>
             </div>
-                        <div class="post" data-id="2">
+
+            <div class="post" data-id="2">
                 <img src="../img/Support/logo.png" alt="HTB Access">
                 <div class="post-content">
                     <h2>HTB - Support</h2>
                     <p class="excerpt">Support es una máquina Windows de Easy difficulty que cuenta con un recurso compartido SMB que permite la autenticación anónima. Tras conectarse al recurso compartido, se descubre un archivo ejecutable que se utiliza para consultar el servidor LDAP de la máquina en busca de usuarios disponibles. Mediante ingeniería inversa, análisis de red o emulación, se identifica la contraseña que el binario utiliza para enlazar el servidor LDAP y que puede utilizarse para realizar más consultas LDAP. Se identifica un usuario llamado `support` en la lista de usuarios, y se encuentra que el campo `info` contiene su contraseña, permitiendo así una conexión WinRM a la máquina. Una vez en la máquina, la información del dominio puede ser recogida a través de `SharpHound`, y `BloodHound` revela que el grupo `Shared Support Accounts` del que el usuario `support` es miembro, tiene privilegios `GenericAll` en el Controlador de Dominio. Se realiza un ataque de Delegación Restringida Basada en Recursos, y se recibe un shell como `NT Authority\System`.</p>
-                    <a href="#" class="read-more" onclick="loadMarkdown(event, 'Support.md')">Read More</a>
+
+                    <!--enlace Read More-->
+                    <a href="./informacion.html?archivo=Support.md" class="read-more">Read More</a>
                 </div>
             </div>
         </div> 
@@ -153,24 +174,24 @@
             document.getElementById('nav-links').classList.toggle('active');
         }
 
-function loadMarkdown(event, file) {
-    event.preventDefault();
-    fetch(file)
-        .then(response => response.text())
-        .then(markdown => {
-            // Oculta la lista de posts y muestra el contenido del markdown
-            document.querySelector('.blog-posts').style.display = 'none';
-            document.getElementById('full-post').style.display = 'block';
-            document.getElementById('post-content').innerHTML = marked.parse(markdown);
+        function loadMarkdown(event, file) {
+            event.preventDefault();
+            fetch(file)
+                .then(response => response.text())
+                .then(markdown => {
+                    // Oculta la lista de posts y muestra el contenido del markdown
+                    document.querySelector('.blog-posts').style.display = 'none';
+                    document.getElementById('full-post').style.display = 'block';
+                    document.getElementById('post-content').innerHTML = marked.parse(markdown);
 
-            // Desplazarse al inicio de la pantalla de forma suave
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        })
-        .catch(error => console.error('Error al cargar el Markdown:', error));
-}
+                    // Desplazarse al inicio de la pantalla de forma suave
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                })
+                .catch(error => console.error('Error al cargar el Markdown:', error));
+        }
     </script>
 </body>
 </html>

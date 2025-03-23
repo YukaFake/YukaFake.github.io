@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writeups - YukaFake</title>
+    <link rel="stylesheet" href="../css/blog-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .post {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .post img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .post-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .translate-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style> <!-- Include Markdown library -->
+</head>
+<body>
+    <nav>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul id="nav-links">
+            <li><a href="../index.html" onclick="loadPage(event, '../index.html')">_hello</a></li>
+            <li><a href="writeups.html" onclick="loadPage(event, 'writeups.html')">_writeups</a></li>
+            <li><a href="blog.html" onclick="loadPage(event, 'blog.html')">_blog</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="content">
+            <h1>Writeups</h1>
+            <p>¡Bienvenido a la sección de Writeups! Espero que encuentres algo interesante y educativo aquí.</p>
+        </div>
+    </header>
+
+    <main id="writeups-main">
+        <div class="blog-posts">
+        </div> 
+
+        <div id="full-post" style="display: none;">
+            <a href="writeups.html" class="back-button">⬅ Volver</a>
+            <div id="post-content" class="markdown-content"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a target="_blank" href="https://github.com/JJoosh"><i class="fab fa-github"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/joshaviles"><i class="fab fa-linkedin"></i></a>
+            <a target="_blank" href="mailto:joshuaavi@proton.me"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        function loadMarkdown(event, file) {
+            event.preventDefault();
+            fetch(file)
+                .then(response => response.text())
+                .then(markdown => {
+                    document.querySelector('.blog-posts').style.display = 'none';
+                    document.getElementById('full-post').style.display = 'block';
+                    document.getElementById('post-content').innerHTML = marked.parse(markdown);
+                })
+                .catch(error => console.error('Error al cargar el Markdown:', error));
+        }
+
+        function hideMarkdown() {
+            document.querySelector('.blog-posts').style.display = 'block';
+            document.getElementById('full-post').style.display = 'none';
+            document.getElementById('post-content').innerHTML = '';
+        }
+
+        function toggleMenu() {
+            document.getElementById('nav-links').classList.toggle('active');
+        }
+
+function loadMarkdown(event, file) {
+    fetch(file)
+        .then(response => response.text())
+        .then(markdown => {
+            // Oculta la lista de posts y muestra el contenido del markdown
+            document.querySelector('.blog-posts').style.display = 'none';
+            document.getElementById('full-post').style.display = 'block';
+            document.getElementById('post-content').innerHTML = marked.parse(markdown);
+
+            // Desplazarse al inicio de la pantalla de forma suave
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        })
+        .catch(error => console.error('Error al cargar el Markdown:', error));
+}
+
+    const params = new URLSearchParams(window.location.search);
+    const archivo = params.get("archivo");
+
+    console.log(archivo); // "Access.md"
+
+
+    loadMarkdown(event, archivo)
+    </script>
+</body>
+</html>

@@ -76,4 +76,3 @@ Con estas actividades, estarás más que listo para enfrentar el examen con conf
 - **Ten a la mano GTFOBins y WADComs**: Estas dos herramientas serán esenciales durante el examen. Considera que se convertirán en tu "biblia" para encontrar y ejecutar comandos útiles durante la prueba.
 - **Sé curioso**: La curiosidad es crucial. Investiga todo lo que encuentres durante el examen. A menudo, los detalles más pequeños pueden ser la clave para avanzar.
 - **Aprende varias formas de transferir archivos**: Es importatne siempre saber varias formas de trasnferir archivos, creeme
-
