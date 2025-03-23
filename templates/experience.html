@@ -5,26 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience</title>
     <link rel="stylesheet" href="./../css/experience.css">
+    <link rel="icon" href="../img/OSCP.png" type="image/jpeg">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="./../js/experience.js"></script>
 </head>
 <body>
+
+    <div class="menu" id="menu">
+        <img class="img-nav" src="./../img/close.png" alt="" id="close">
+        <a class="a-nav" href="./../index.html">Hello</a>
+        <a class="a-nav" href="./writeups.html">Writeups</a>
+        <a class="a-nav" href="./blog.html">Blogs</a>
+    </div>
+
     <main class="div-1200">
-        <nav>
+        <nav id="desktop">
             <div class="div-nav">
-                <img class="img-nav" src="./../img/home.png" alt="">
+                <a href="./../index.html">
+                    <img class="img-nav" src="./../img/home.png" alt="">
+                </a>
             </div>
             <div class="div-nav">
                 <a class="a-nav" href="./../index.html">Hello</a>
                 <a class="a-nav" href="./writeups.html">Writeups</a>
                 <a class="a-nav" href="./blog.html">Blogs</a>
                 <p class="a-nav">|</p>
+                <!-- <img class="img-nav" src="./../img/mode.png" alt=""> -->
+            </div>
+        </nav>
+        
+        <nav id="movile">
+            <div class="div-nav">
+                <img class="img-nav" src="./../img/burger.png" alt="" id="burger">
+            </div>
+            <div class="div-nav">
                 <img class="img-nav" src="./../img/mode.png" alt="">
             </div>
         </nav>
     </main>
-    <main class="div-1200 content" id="post-content">
+
+    <div class="div-1200 content" id="post-content">
         
-    </main>
+    </div>
 
     <script>
         function loadMarkdown(file) {
