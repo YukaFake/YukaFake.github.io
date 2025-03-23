@@ -117,7 +117,7 @@ nav {
 /* Estilizar párrafos */
 #post-content p {
     font-size: 1.2rem;
-    margin-bottom: 15px;
+    margin: 25px 0px 25px 0px;
 }
 
 /* Estilizar listas */
