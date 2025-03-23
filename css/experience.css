@@ -88,7 +88,7 @@ nav {
 /* Estilos generales para el contenido Markdown */
 #post-content {
     font-family: "Arial", sans-serif;
-    color: #ddd;  /* Color de texto (ajústalo según el fondo) */
+    color: var(--var-white);  /* Color de texto (ajústalo según el fondo) */
     line-height: 1.6;
     padding: 20px;
     background-color: var(--var-black); /* Fondo oscuro */
