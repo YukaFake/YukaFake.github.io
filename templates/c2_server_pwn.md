@@ -7,22 +7,22 @@ Durante el CTF nacional organizado por Hackdef en Guadalajara, se llevó a cabo 
 
 # Desafio
 
-![](Pasted%20image%2020250412012644.png)
+![](../img/c2_server_pwn/0.png)
 
 Se nos proporcionó un binario, el cual se verificó inicialmente para determinar su tipo y comprobar si presenta alguna restricción. Para ello, utilizamos la herramienta **checkfile**.
 
-![](Pasted%20image%2020250412012848.png)
+![](../img/c2_server_pwn/1.png)
 
 Posteriormente se decidio ejecutar el binario logrando observar que el flujo de este servicio muestra que el binario está diseñado para recibir y exfiltrar datos. Tras recibir la letra "A", el programa indica que los datos han sido exfiltrados exitosamente, lo que sugiere que el binario realiza alguna operación relacionada con la captura o transferencia de información a un destino externo. Esto podría ser parte de un desafío de CTF o un ejercicio de análisis de seguridad, enfocado en la explotación de vulnerabilidades de exfiltración de datos.
 
-![](Pasted%20image%2020250412013145.png)
+![](../img/c2_server_pwn/2.png)
 
 Al no entender completamente el funcionamiento del programa, decidimos proceder con el análisis estático: descompilamos y desensamblamos el binario para comprender la lógica detrás del código.
 
 
 Al decompilarlo utilizando **Binary Ninja**, obtuvimos el siguiente resultado:
 
-![](Pasted%20image%2020250412013309.png)
+![](../img/c2_server_pwn/3.png)
 
 
 Para comprender mejor lo que está sucediendo, analizaremos cada una de las funciones involucradas. Comencemos por examinar la función **`main()`**.
@@ -82,7 +82,7 @@ Utilizando **gdb-pwning**, intentamos enviar un payload para explotar la vulnera
 3. **`b"C" * 20`**:
     - Finalmente, se agregan **20 caracteres 'C'**. Estos 20 bytes son solo un relleno adicional, enviados para llenar la memoria restante después de los bytes que controlan la dirección de retorno. Aunque no tienen un propósito crítico en la explotación, se utilizan para garantizar que se llene la entrada con datos adicionales y asegurar que no se quede espacio vacío en el buffer.
 
-![](Pasted%20image%2020250412015402.png)
+![](../img/c2_server_pwn/4.png)
 
 
 **Observación interesante**: Después de enviar el payload, notamos que la dirección de retorno a la que está apuntando el programa es **0x42424242**, que corresponde a las 4 **'B'**. Esto ocurre debido a un fenómeno que se genera como consecuencia del **desbordamiento de buffer**.
@@ -95,7 +95,7 @@ Este comportamiento ocurre porque el **desbordamiento de buffer** sobrescribe la
 
 Para comprender este comportamiento en detalle, debemos examinar el **código desamblado** de la función **`vuln()`**. Al hacerlo, podremos ver cómo se maneja el buffer, cómo se almacenan los valores en la pila, y cómo la sobrescritura de la dirección de retorno con las 4 **'B'** lleva al programa a intentar ejecutar la dirección **0x42424242**.
 
-![](Pasted%20image%2020250412015532.png)
+![](../img/c2_server_pwn/5.png)
 
 
 En la función **`vuln()`**, observamos lo siguiente en el código desamblado:
@@ -123,7 +123,7 @@ Al hacer debugging del programa, lo visualizamos de la siguiente manera:
 
 Estableceremos un **breakpoint** justo antes de la llamada a **`fgets()`** para entender por qué la dirección **0x42424242** es la que se está utilizando. Luego, enviamos nuestro payload de **'A'** y continuamos avanzando hasta llegar a un punto clave.
 
-![](Pasted%20image%2020250412100325.png)
+![](../img/c2_server_pwn/6.png)
 
 En primer lugar, el valor de **EBP** tomará los primeros **4 bytes** de lo que enviamos inicialmente, es decir, las **'A'**. Esto sucede porque estamos trabajando en una arquitectura de **32 bits**, donde cada valor de la pila ocupa **4 bytes**. Este comportamiento es típico en sistemas de 32 bits, ya que los punteros y direcciones son de 4 bytes.
 
@@ -136,10 +136,10 @@ Aquí es donde el valor de **EBP** se ve afectado. Al ejecutar el **`leave`**, e
 
 Al final, el flujo del programa regresa a la dirección **0x42424242**, que corresponde a los **4 bytes de 'A'** que sobrescribieron la dirección de retorno.
 
-![](Pasted%20image%2020250412100622.png)
+![](../img/c2_server_pwn/7.png)
 
 
-![](Pasted%20image%2020250412100641.png)
+![](../img/c2_server_pwn/8.png)
 
 Ahora que hemos logrado controlar la dirección de retorno, podemos comenzar a escribir nuestro script de explotación.
 
@@ -205,7 +205,7 @@ shell.interactive()
 
 Si juntamos todo esto obtenemos lo siguiente 
 
-![](Pasted%20image%2020250412102107.png)
+![](../img/c2_server_pwn/9.png)
 
 ```python
 #!/usr/bin/python3 
@@ -242,7 +242,7 @@ shell.interactive()
 
 En resumen, nuestro exploit aprovecha el **desbordamiento de buffer** para sobrescribir la memoria de manera iterativa, enviando cada carácter de **`/bin/bash`** uno por uno en un bucle. Sin embargo, para lograr esto, necesitamos que, después de cada iteración del desbordamiento de buffer, el programa entre en un bucle. Una vez que todos los caracteres de **`/bin/bash`** hayan sido enviados, realizamos una última sobrescritura de la memoria para redirigir la ejecución a la función **`execCommand`**, lo que nos permitirá obtener una shell interactiva.
 
-![](Pasted%20image%2020250412102556.png)
+![](../img/c2_server_pwn/10.png)
 
 Y seria todo por este desafío :)
 
